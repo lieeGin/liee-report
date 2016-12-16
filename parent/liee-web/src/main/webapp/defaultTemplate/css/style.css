@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/bootstrap/css/bootstrap.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css);
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/dist/css/AdminLTE.min.css);
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/dist/css/skins/_all-skins.min.css);
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/plugins/iCheck/flat/blue.css);
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/plugins/morris/morris.css);
+
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/plugins/jvectormap/jquery-jvectormap-1.2.2.css);
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/plugins/datepicker/datepicker3.css);
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/plugins/daterangepicker/daterangepicker.css);
+@import url(../../defaultTemplate/plugin/AdminLTE-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css);

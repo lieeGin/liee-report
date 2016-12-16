@@ -1,0 +1,39 @@
+.divTr{
+			margin:10 10 10 10;
+		}
+		
+.citySelect_body{ width:440px; background:#fff;z-index:99; border:1px solid #1B83CC; position:absolute; top:252px; left:230px; display:none;}
+.citySelect_body2{ width:220px; background:#fff;z-index:99; border:1px solid #BBBBBB; position:absolute; top:295px; left:230px; display:none;}
+
+#info { padding:0 10px 10px 10px; line-height:24px;}
+#info .close{ color:#1B83CC;}
+
+.cityList{ width:100%; font-family:Verdana; border-bottom:1px dashed #ccc; padding-bottom:5px; float:left;}
+.cityList li{ width:50px; height:18px; line-height:18px; text-align:center; float:left;}
+.cityList li a.selected{ color:#fff; width:55px; height:18px; display:block; text-decoration:none; background:#1B83CC;}
+ 
+.cityInfo{border:2px solid #1B83CC;padding:6px 0px 8px;background:#E9F2F9;}
+.cityInfo li a{font-size:12px;}
+.current1{background:#1B83CC;color:#fff;}
+.cityList li.provinceName{display:block;float:none;font-weight:bold;}
+
+.cityListBody{ width:100%; }
+.cityListBody ul{ margin-left:10px;}
+.cityListBody li{ width:100%; margin-top:10px; float:left;}
+.cityListBody li span{ width:20px; height:14px; line-height:14px; text-align:center; background:url(../images/top_city_bg2.png) no-repeat; display:block; float:left;}
+.cityListBody li a{ width:51px; height:20px; line-height:20px;text-align:left; overflow:hidden; float:left;}
+ 
+.searchhotscroll {margin:5px 0px; line-height:23px;width: 220px;}
+.searchhotscroll a{ font-size:14px;margin-left: 14px;color:#000}
+.searchhotscroll a:hover{ font-size:14px;background-color:  #4698D2;text-decoration: none;color:#FFF;cursor: pointer;}
+.searchhotscroll h1{font-weight:bold; font-size:14px;margin-left: 14px; }
+.searchline{border-bottom:1px solid #BBBBBB;margin:7px 0px;}
+.searchC {margin:8px 0; }
+.searchC li{ line-height:38px;}
+.selectTeeTime{font-size:14px;background-color: #4698D2;text-decoration: none;color:#FFF;cursor: pointer;}
+a.selectTeeTime{color:#FFF;}
+
+#major_container { padding-bottom: 17px; background: url(/images/login_under.gif) no-repeat center bottom; width: 100%; }
+#major_login { height: 38px; width: 100%; }
+.option { display: block; height: 38px; width: 100%; border-bottom:1px solid #cbcbcb;}
+.option li { height: 38px; display: block; float: left; width: 133px;display: block;background: url(/images/option.gif) no-repeat center bottom; text-align: center; font-size:14px; font-weight:bold; }		
