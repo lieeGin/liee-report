@@ -10,8 +10,14 @@
  
  var alignTypes = [{"text":"居左","value":"left"},{"text":"居右","value":"right"},{"text":"居中","value":"center"}];
  var YN = [{"text":"是","value":"1"},{"text":"否","value":"0"}];
+ 
+ var dataSourceMap = {"0":"groovy脚本查询","1":"接口查询"};
+ var reportShowWayMap = {"0":"表格","1":"柱状图","2":"曲线图","3":"雷达图","4":"饼图"};
 
 $(function(){
+	
+		initParamGrid(0);  // 参数表格
+		initColumnGrid(0);  // 结果列 表格
 	
 		dataGrid = $('#dataGrid').datagrid({  
 	        url: sysUtil.bp()+'/report/pageQuery',
@@ -44,6 +50,19 @@ $(function(){
 	            {field:'id',title:'ID',width:100,align:'center'},  
 	            {field:'name',title:'报表名称',width:100,align:'center'},  
 	  			{field:'code',title:'报表编号',width:100,align:'center'},
+	  			{field:'dataSource',title:'数据来源',width:100,align:'center',formatter:function(val){
+	  				return dataSourceMap[val];
+	  			}},
+	  			{field:'reportShowWay',title:'展示方式',width:100,align:'center',formatter:function(val){
+	  				var html="";
+	  				if(val){
+	  					var strs = val.split(",");
+	  					for(var i = 0 ; i<strs.length; i++){
+	  						html+=reportShowWayMap[strs[i]]+",";
+	  					}
+	  				}
+	  				return html;
+	  			}}
 	        ]],
 	        toolbar:[{
         		text:'新增',
@@ -65,13 +84,7 @@ $(function(){
         			$('#errorMessage').html('');
         			var row = dataGrid.datagrid('getSelected');
         			if(row){
-        				editForm.form('clear');
-        				editForm.form('load',row);
-        				
-        				paramGridQuery(row.id);
-        				columnGridQuery(row.id);
-        				
-	        			editDialog.dialog("open");
+        				setDataEdit(row);
     				}else{
     					$.messager.show({
 			            	title:'提示', 
@@ -148,6 +161,40 @@ $(function(){
 			}]
 		});
 		
+		function setDataEdit(row){
+			
+			base.authAjax({
+				type: "post",  
+				url: sysUtil.bp()+'/report/getById',
+				data:{"id":row.id},
+				contentType:"application/x-www-form-urlencoded;charset=UTF-8",
+				dataType:"json", 
+				success:function(data){
+					if(data.success){
+						
+						editForm.form('clear');
+						editForm.form('load',data.obj.report);
+						$("#groovyStr").val(data.obj.groovyStr);
+						// 
+						
+						paramGridQuery(row.id);
+						columnGridQuery(row.id);
+						
+						editDialog.dialog("open");
+						
+					}else{
+						$.messager.show({
+			            	title:'操作失败', 
+			           	 	msg:data.errMsg,
+			            	timeout:3000
+			        	});
+					}
+				}
+			}); 
+		}
+		
+		
+		
 		/**
 		 * 提交
 		 */
@@ -176,7 +223,7 @@ $(function(){
 				submitData.paramData = paramData;
 				submitData.columnData = columnData;
 				
-				alert(JSON.stringify(submitData));
+			//	alert(JSON.stringify(submitData));
 				
 	 			base.authAjax({
 					type: "post",  
@@ -295,7 +342,8 @@ $(function(){
 		function  initParamGrid(reportId){
 			
 			paramGrid = $('#paramGrid').datagrid({  
-		        url: sysUtil.bp()+'/report/queryParamByReportId?id='+reportId,
+		        url: sysUtil.bp()+'/report/queryParamByReportId',
+		        data:{"id":reportId},
 		        fitColumns:true,
 		      	border:true,
 		        singleSelect:true,
@@ -399,7 +447,8 @@ $(function(){
 		function  initColumnGrid(reportId){
 			
 			columnGrid = $('#columnGrid').datagrid({  
-		        url: sysUtil.bp()+'/report/queryColumnByReportId?id='+reportId,
+		        url: sysUtil.bp()+'/report/queryColumnByReportId',
+		        data:{"id":reportId},
 		        fitColumns:true,
 		      	border:true,
 		        singleSelect:true,

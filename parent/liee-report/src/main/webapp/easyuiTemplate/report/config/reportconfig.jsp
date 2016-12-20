@@ -46,6 +46,7 @@
 			  							<td align="right" class="tdStyle">名称:</td>
 			  							<td align="left" class="tdStyle">
 			  								<input type="hidden" name="id">
+			  								<input type="hidden" name="groovyFile">
 			  								<input type="text" name="name" class="easyui-validatebox" required="true" style="font-size:12px;width:150px;"/>
 			  							</td>
 			  							<td align="right" class="tdStyle">编号:</td>
@@ -66,6 +67,16 @@
 			  							<td align="right" class="tdStyle">接口地址:</td>
 			  							<td align="left" class="tdStyle" colspan="3">
 			  								<input type="text" name="apiAddress" class="easyui-validatebox"  style="font-size:12px;width:90%;"/>
+			  							</td>
+			  						</tr>
+			  						<tr>
+			  							<td align="right" class="tdStyle">展示模式:</td>
+			  							<td align="left" class="tdStyle" colspan="3">
+			  								    <input type="checkbox" name="reportShowWay" value="0"   />表格
+								                <input type="checkbox" name="reportShowWay" value="1"  />柱状图<br />
+								                <input type="checkbox" name="reportShowWay" value="2" />曲线图
+								                <input type="checkbox" name="reportShowWay" value="3"  />雷达图<br />
+								                <input type="checkbox" name="reportShowWay" value="4"  />饼图
 			  							</td>
 			  						</tr>
 			  						<tr>

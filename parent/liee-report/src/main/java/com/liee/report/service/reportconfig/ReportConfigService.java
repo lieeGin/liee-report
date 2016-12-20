@@ -1,5 +1,6 @@
 package com.liee.report.service.reportconfig;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +10,11 @@ import org.springframework.stereotype.Service;
 import com.jdao.base.QueryDao;
 import com.jdao.base.Where;
 import com.liee.core.common.BasePageModel;
+import com.liee.core.constant.Constant;
+import com.liee.core.dao.Systemconfig;
 import com.liee.core.exception.BaseException;
 import com.liee.core.service.BaseService;
+import com.liee.core.utils.FileUtil;
 import com.liee.core.utils.StringUtil;
 import com.liee.report.dao.RepReport;
 import com.liee.report.dao.RepReportColumn;
@@ -90,13 +94,58 @@ public class ReportConfigService  extends BaseService {
 				saveOrUpdateParam(report.getId(),paramList);
 			}else{  // 新增
 				int id = report.saveAndGetLastInsertId4MYSQL();
+				report.setId(id);
 				// 保存子表  
 				saveOrUpdateColumn(id,columnList);
 				saveOrUpdateParam(id,paramList);
 			}
+			saveOrUpdateGroovyFile(report,groovyStr);
 			
 		} catch (Exception e) {
 			log.error("保存报表失败："+e.getMessage(),e);
+			throw new BaseException(e.getMessage());  // 抛出异常到controller
+		}
+	}
+	
+	
+	/**
+	 * 保存或者更新脚本
+	 * @param report
+	 * @param groovyStr
+	 */
+	public void saveOrUpdateGroovyFile(RepReport report,String groovyStr){
+		try{
+			// 根据路径读取旧文件。有则删除。
+			String filePath = report.getGroovyFile();
+			if(!StringUtil.isEmpty(filePath)){
+				File oldFile = new File(filePath);
+				if(oldFile.exists()){
+					oldFile.delete();
+				}
+			}
+			String fileBasePath = "";
+			// 写入新文件。
+			Systemconfig q = new Systemconfig();
+			q.where(Systemconfig.KEYWORD.EQ(Constant.CONFIG_KEY_GROOVY_PATH));
+			List<Systemconfig> configList = q.query();
+			if(configList!=null && configList.size() > 0){
+				fileBasePath = configList.get(0).getValuestr();
+			}
+			
+			if(StringUtil.isEmpty(fileBasePath)){
+				throw new BaseException("没有配置文件保存路径");
+			}
+			
+			String newFileName = System.currentTimeMillis()+"_"+report.getId()+".groovy";
+			FileUtil.saveFile(newFileName, fileBasePath, groovyStr);
+			
+			report.setGroovyFile(fileBasePath+"/"+newFileName); 
+			
+			report.where(RepReport.ID.EQ(report.getId()));
+			report.update();
+			
+		}catch(Exception e){
+			log.error("保存结果列失败："+e.getMessage(),e);
 			throw new BaseException(e.getMessage());  // 抛出异常到controller
 		}
 	}

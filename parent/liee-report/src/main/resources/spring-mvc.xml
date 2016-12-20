@@ -44,14 +44,73 @@
 		</property>
 	</bean>
 
-	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/" />  <!-- /WEB-INF/views  直接放在根目录下 -->
+		<property name="prefix" value="/" />  
 		<property name="suffix" value=".jsp" />
 	</bean>
+	 -->
+	
+	
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/" p:suffix=".jsp" /> -->   <!-- WEB-INF/views/ -->
+	<bean id="viewResolver" class="com.liee.report.view.MyViewResolver">
+        <property name="defaultViewResolver" ref="jspViewResolver"/>
+        <property name="viewResolverMap">
+            <map>
+             	<entry>
+                    <key>
+                        <set>
+                            <value>.jsp</value>
+                        </set>
+                    </key>
+                    <ref bean="jspViewResolver"/>
+                </entry>
+            	<entry>
+                    <key>
+                        <set>
+                            <value>.vm</value>
+                            <value>.htm</value>
+                            <value>.html</value>
+                        </set>
+                    </key>
+                    <ref bean="velocityViewResolver"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    
+    <bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/"/>
+    </bean>
+
+   <!--  Velocity ViewResolver Configuration -->
+    <bean id="velocityViewResolver" class = "org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+         <property name="order" value="0" />
+         <property name="prefix" value="/"/>
+         
+         <property name="toolboxConfigLocation" value="/WEB-INF/classes/tools.xml" /><!--toolbox配置文件路径-->  
+         <property name="dateToolAttribute" value="date" /><!--日期函数名称-->  
+         <property name="numberToolAttribute" value="number" /><!--数字函数名称-->  
+         <property name="contentType" value="text/html;charset=UTF-8" />  
+         <property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持-->  
+         <property name="exposeRequestAttributes" value="true" /><!--是否开放request属性-->  
+         <property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->  
+    </bean>
+    
+    <!-- Velocity Configuration -->     
+    <bean id="velocityConfig" class = "org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+         <property name="configLocation" value="classpath:velocity.properties"/>
+         <property name="resourceLoaderPath" value="/" />
+    </bean>
+	
 	
 	<!-- 配置多文件上传 -->
 	<bean id="multipartResolver"

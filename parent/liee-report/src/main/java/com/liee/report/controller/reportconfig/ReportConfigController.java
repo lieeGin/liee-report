@@ -1,7 +1,9 @@
 package com.liee.report.controller.reportconfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import com.liee.core.common.BaseReturnModel;
 import com.liee.core.controller.BaseController;
 import com.liee.core.log.Logger;
 import com.liee.core.utils.ArrayUtil;
+import com.liee.core.utils.FileUtil;
 import com.liee.core.utils.StringUtil;
 import com.liee.report.dao.RepReport;
 import com.liee.report.dao.RepReportColumn;
@@ -127,6 +130,8 @@ public class ReportConfigController extends BaseController{
 		String code = StringUtil.nullToString(getRequestParameter(request, "code"));
 		int dataSource = StringUtil.stringToInt(getRequestParameter(request, "dataSource"));
 		String apiAddress = StringUtil.nullToString(getRequestParameter(request, "apiAddress"));
+		String reportShowWay = StringUtil.nullToString(getRequestParameter(request, "reportShowWay"));
+		String groovyFile = StringUtil.nullToString(getRequestParameter(request, "groovyFile"));
 		
 		RepReport report = new RepReport();
 		report.setId(id);
@@ -134,6 +139,8 @@ public class ReportConfigController extends BaseController{
 		report.setName(name);
 		report.setCode(code);
 		report.setDataSource(dataSource);
+		report.setReportShowWay(reportShowWay);
+		report.setGroovyFile(groovyFile);
 		
 		return report;
 	}
@@ -214,6 +221,32 @@ public class ReportConfigController extends BaseController{
 			logger.error("查询报表查询条件集合错误", e);
 		}
 		return list;
+	}
+	
+	
+	@RequestMapping(value = "/getById", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public BaseReturnModel getById(HttpServletRequest request) {
+		BaseReturnModel rm = new BaseReturnModel();
+		int id = StringUtil.stringToInt(getRequestParameter(request, "id"));
+		try{
+			
+			RepReport r = new RepReport();
+			r.where(RepReport.ID.EQ(id));
+			r = r.queryById();
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			String groovyStr = FileUtil.readTextFile(r.getGroovyFile(), "utf-8");
+			
+			map.put("report", r);
+			map.put("groovyStr", groovyStr);
+			rm.setObj(map);
+			rm.setSuccess(true);
+		}catch(Exception e){
+			rm.setSuccess(false);
+			rm.setErrMsg(e.getMessage());
+		}
+		return rm;
 	}
 	
 

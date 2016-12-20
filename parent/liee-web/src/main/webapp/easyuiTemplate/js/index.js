@@ -70,7 +70,15 @@
         				if(menulist.length>0){
         					var str='<ul>';
         					for(var j=0;j< menulist.length; j++){
-        						str += '<li><div><a ref="'+menulist[j]["menuId"]+'" href="javascript:;" rel="'+sysUtil.bp()+'/easyuiTemplate/' + menulist[j]["url"] +'?menuId='+menulist[j]["menuId"]+'&authLevel='+menulist[j]["authLevel"]+ '" ><span class="nav">' + menulist[j]["menuName"] + '</span></a></div></li> ';
+        						
+        						var url='';
+        						var template = "/";
+        						if(menulist[j]["url"].indexOf(".jsp")!=-1){
+        							template = '/easyuiTemplate/'
+        						}
+        						url = sysUtil.bp()+ template + menulist[j]["url"] +'?menuId='+menulist[j]["menuId"]+'&authLevel='+menulist[j]["authLevel"];
+        						
+        						str += '<li><div><a ref="'+menulist[j]["menuId"]+'" href="javascript:;" rel="'+url+ '" ><span class="nav">' + menulist[j]["menuName"] + '</span></a></div></li> ';
         					}
         					str += '</ul>';
         					$('#nav').accordion('add', {
