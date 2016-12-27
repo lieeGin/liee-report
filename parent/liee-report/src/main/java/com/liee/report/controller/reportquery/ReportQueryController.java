@@ -2,6 +2,7 @@ package com.liee.report.controller.reportquery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.liee.core.common.BaseReturnModel;
 import com.liee.core.controller.BaseController;
 import com.liee.report.dao.RepReport;
 import com.liee.report.dao.RepReportColumn;
@@ -23,9 +26,8 @@ public class ReportQueryController extends BaseController{
 	
 
 	@RequestMapping(value = "/{code}", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView pageQuery(HttpServletRequest request,@PathVariable String code) {
+	public ModelAndView pageQuery(HttpServletRequest request,@PathVariable String code, int menuId, int authLevel) {
 		ModelAndView model = new ModelAndView();
-		
 		
 		RepReport r = getReport(code);
 		List<RepReportParam> paramList = getParams(r.getId());
@@ -34,6 +36,8 @@ public class ReportQueryController extends BaseController{
 		model.addObject("report", r);
 		model.addObject("params", paramList);
 		model.addObject("gridColumns", columnList);
+		model.addObject("menuId", menuId);
+		model.addObject("authLevel", authLevel);
 		
 		model.setViewName("easyuiTemplate/report/query/reportquery.html"); 
 		return model;
@@ -103,7 +107,21 @@ public class ReportQueryController extends BaseController{
 	}
 	
 	
-	
+	@RequestMapping(value = "/get{code}Data", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public BaseReturnModel getPageData(HttpServletRequest request,@PathVariable String code) {
+		BaseReturnModel br = new BaseReturnModel();
+		
+		List<Map<String,Object>> datas = new ArrayList<Map<String,Object>>();
+		
+		RepReport r = getReport(code);
+		List<RepReportParam> paramList = getParams(r.getId());
+		List<RepReportColumn> columnList = getColumns(r.getId());
+		
+		br.setSuccess(true); 
+		br.setObj(datas);
+		return br;
+	}
 	
 	
 }

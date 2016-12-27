@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-	set(#path=rc.contextPath)
+<head> 
+     <!-- 该html提供给velocity模版使用 -->
 	<link rel="stylesheet" href="${path}/easyuiTemplate/css/default.css" type="text/css">
 	<link rel="stylesheet" href="${path}/easyuiTemplate/css/main.css" type="text/css">
     <link rel="stylesheet" href="${path}/easyuiTemplate/css/chosen.css" type="text/css">
@@ -19,7 +19,7 @@
   	
 
   <script>
-	$(document).ajaxComplete(function(event, xhr, settings) {
+  $(document).ajaxComplete(function(event, xhr, settings) {
 	    if(xhr.getResponseHeader("sessionstatus")=="timeOut"){  // 登录超时
 	        if(xhr.getResponseHeader("loginPath")){
 	          //  alert("会话过期，请重新登陆!");

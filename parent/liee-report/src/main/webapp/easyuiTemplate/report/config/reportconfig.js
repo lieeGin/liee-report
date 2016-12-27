@@ -5,10 +5,10 @@
  var paramGrid;
  var columnGrid;
  
- var dataTypes = [{"text":"文本","value":"1"},{"text":"数字","value":"2"}];
- var widgetTypes = [{"text":"文本框","value":"1"},{"text":"数字框","value":"2"},{"text":"下拉框","value":"3"}];
+ var dataTypes = [{"text":"文本","value":"text"},{"text":"数字","value":"number"}];                   //  查询参数类型
+ var widgetTypes = [{"text":"文本框","value":"text"},{"text":"数字框","value":"number"},{"text":"下拉框","value":"select"}];    // 查询参数控件类型
  
- var alignTypes = [{"text":"居左","value":"left"},{"text":"居右","value":"right"},{"text":"居中","value":"center"}];
+ var alignTypes = [{"text":"居左","value":"left"},{"text":"居右","value":"right"},{"text":"居中","value":"center"}];   // 结果表格显示对齐
  var YN = [{"text":"是","value":"1"},{"text":"否","value":"0"}];
  
  var dataSourceMap = {"0":"groovy脚本查询","1":"接口查询"};
@@ -420,8 +420,8 @@ $(function(){
 	        		handler:function(){
 	        			// 添加行
 	        			var newRow = {};
-	        			newRow.type=1;
-	        			newRow.widgetType=1;
+	        			newRow.type='text';
+	        			newRow.widgetType='text';
 	        			paramGrid.datagrid("appendRow", newRow);
 	        		}
 	        	},{
