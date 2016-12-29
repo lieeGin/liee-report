@@ -16,6 +16,7 @@ CREATE TABLE `rep_report_param` (
   `name` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '参数名称',
   `code` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '参数key',
   `type` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '参数数据类型(number,text等)',
+  `compare_way` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '比较方式(lt,gt,le,ge,eq,like,in等)',
   `widget_type` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '该参数的控件类型(input,select,checkbox等)',
   `select_key` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '控件类型为select时，通过ajax后台加载数据字典的key值',
   PRIMARY KEY (`id`)

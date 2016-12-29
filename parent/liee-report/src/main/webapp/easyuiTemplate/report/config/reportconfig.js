@@ -7,6 +7,8 @@
  
  var dataTypes = [{"text":"文本","value":"text"},{"text":"数字","value":"number"}];                   //  查询参数类型
  var widgetTypes = [{"text":"文本框","value":"text"},{"text":"数字框","value":"number"},{"text":"下拉框","value":"select"}];    // 查询参数控件类型
+ var compareWays = [{"text":"等于","value":"eq"},{"text":"大于","value":"gt"},{"text":"大于等于","value":"ge"},{"text":"小于","value":"lt"},{"text":"小于等于","value":"le"},
+                    {"text":"模糊匹配","value":"like"},{"text":"包含","value":"in"}]
  
  var alignTypes = [{"text":"居左","value":"left"},{"text":"居右","value":"right"},{"text":"居中","value":"center"}];   // 结果表格显示对齐
  var YN = [{"text":"是","value":"1"},{"text":"否","value":"0"}];
@@ -395,6 +397,25 @@ $(function(){
 					    } 
 					    return value;
 					}},
+					
+					{field:'compareWay',title:'比较方式',width:100,align:'center', editor:{  
+		                type:'combobox',  
+		                options:{  
+		                    valueField:'value',  
+		                    textField:'text',  
+		                    data:compareWays,  
+		                    required:true
+		                }  
+		            },
+		            formatter: function(value) { 
+					    for (var i = 0; i < compareWays.length; i++) { 
+					        if (compareWays[i].value == value) { 
+					            return compareWays[i].text; 
+					        } 
+					    } 
+					    return value;
+					}},
+					
 		  			{field:'widgetType',title:'控件类型',width:100,align:'center', editor:{  
 		                type:'combobox',  
 		                options:{  

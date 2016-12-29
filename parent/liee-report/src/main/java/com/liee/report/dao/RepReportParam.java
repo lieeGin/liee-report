@@ -5,7 +5,7 @@ import com.jdao.base.Table;
 import com.jdao.base.Fields;
 
 /**
- * @date 2016-12-09 16:20:27  dao for table rep_report_param
+ * @date 2016-12-29 16:17:07  dao for table rep_report_param
  */
 public class RepReportParam extends Table<RepReportParam> implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -24,6 +24,8 @@ public class RepReportParam extends Table<RepReportParam> implements Serializabl
 	public final static Fields WIDGETTYPE = new Fields("`widget_type`");
 	/**select_key*/
 	public final static Fields SELECTKEY = new Fields("`select_key`");
+	/**compare_way*/
+	public final static Fields COMPAREWAY = new Fields("`compare_way`");
 
 	private int id = 0;
 	private int reportId = 0;
@@ -32,15 +34,16 @@ public class RepReportParam extends Table<RepReportParam> implements Serializabl
 	private java.lang.String type;
 	private java.lang.String widgetType;
 	private java.lang.String selectKey;
+	private java.lang.String compareWay;
 
 	public RepReportParam(){
 		super(TABLENAME_,RepReportParam.class);
-		super.setFields(ID,REPORTID,NAME,CODE,TYPE,WIDGETTYPE,SELECTKEY);
+		super.setFields(ID,REPORTID,NAME,CODE,TYPE,WIDGETTYPE,SELECTKEY,COMPAREWAY);
 	}
 
 	public RepReportParam(String tableName4sharding){
 		super(tableName4sharding,RepReportParam.class);
-		super.setFields(ID,REPORTID,NAME,CODE,TYPE,WIDGETTYPE,SELECTKEY);
+		super.setFields(ID,REPORTID,NAME,CODE,TYPE,WIDGETTYPE,SELECTKEY,COMPAREWAY);
 	}
 
 	public int getId(){
@@ -98,5 +101,13 @@ public class RepReportParam extends Table<RepReportParam> implements Serializabl
 	public void setSelectKey(java.lang.String selectKey){
 		fieldValueMap.put(SELECTKEY, selectKey);
 		 this.selectKey=selectKey;
+	}
+	public java.lang.String getCompareWay(){
+		return this.compareWay;
+	}
+
+	public void setCompareWay(java.lang.String compareWay){
+		fieldValueMap.put(COMPAREWAY, compareWay);
+		 this.compareWay=compareWay;
 	}
 }

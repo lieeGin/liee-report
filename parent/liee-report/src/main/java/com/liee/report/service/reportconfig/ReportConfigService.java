@@ -136,7 +136,7 @@ public class ReportConfigService  extends BaseService {
 				throw new BaseException("没有配置文件保存路径");
 			}
 			
-			String newFileName = System.currentTimeMillis()+"_"+report.getId()+".groovy";
+			String newFileName = report.getCode()+"_"+System.currentTimeMillis()+"_"+report.getId()+".groovy";
 			FileUtil.saveFile(newFileName, fileBasePath, groovyStr);
 			
 			report.setGroovyFile(fileBasePath+"/"+newFileName); 

@@ -11,7 +11,7 @@
   			
   			// 初始化表格
   			dataGrid = $('#dataGrid').datagrid({  
-  		        url: sysUtil.bp()+'/reportQuery/get'+'${report.code}'+'Data',
+  		        url: sysUtil.bp()+'/reportQuery/get'+'${report.code}'+'GridData',
   		        fitColumns:true,
   		      	border:true,
   		        singleSelect:true,
@@ -39,13 +39,16 @@
   		        },  
   		        columns:[[
   					#foreach( $column in $gridColumns )
-  						 {field:'$column.field',title:'$column.title',width:'$column.width',align:'$column.align',
+  						 {field:'$column.field',title:'$column.title',width:'$column.width',align:'$column.align'
   						  #if($column.formatter && $column.formatter!="")
-  							  formatter:function(val){
+  							  ,formatter:function(val){
   								  $column.formatter
   					  			}
   						  #end
-  						 },
+  						 }
+  						#if($velocityCount!=$gridColumns.size())
+  						,
+  						#end
   					#end
   		        ]],
   		        toolbar:[]
