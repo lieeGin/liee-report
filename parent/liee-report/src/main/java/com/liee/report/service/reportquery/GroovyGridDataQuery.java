@@ -1,9 +1,12 @@
 package com.liee.report.service.reportquery;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.liee.core.common.BasePageModel;
+import com.liee.core.utils.StringUtil;
 import com.liee.report.dao.RepReportColumn;
 
 import groovy.lang.GroovyObject;
@@ -52,7 +55,20 @@ public class GroovyGridDataQuery extends GridDataQueryAbstract{
 	@Override
 	public List<Map<String, Object>> getDataList(Map<String, Object> queryResult, List<RepReportColumn> resultColumn) {
 		List<Map<String, Object>> list =  (List<Map<String, Object>>)queryResult.get("rows");
-		return list;
+		List<Map<String,Object>> afterList = new ArrayList<Map<String,Object>>();
+		for (Map<String,Object> map : list) {
+			Map<String,Object> newMap = new HashMap<String,Object>();
+			// 将结果的字段名称转成前台所需要的字段名
+			for (RepReportColumn column : resultColumn) {
+				String f = column.getField();
+				String sf = column.getSourceField();
+				String sourceKey = StringUtil.isEmpty(sf)?f:sf;
+				newMap.put(f, map.get(sourceKey));
+			}
+			afterList.add(newMap);
+		}
+		
+		return afterList;
 	}
 
 	

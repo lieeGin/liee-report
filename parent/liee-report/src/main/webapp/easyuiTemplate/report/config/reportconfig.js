@@ -380,6 +380,7 @@ $(function(){
 		            {field:'id',title:'ID',width:100,align:'center'},  
 		            {field:'name',title:'参数名',width:100,align:'center',editor:{type : 'text', required:true}},  
 		  			{field:'code',title:'参数编码',width:100,align:'center',editor:{type : 'text', required:true}},
+		  			{field:'sourceCode',title:'对应数据源编码',width:100,align:'center',editor:{type : 'text'}},
 		  			{field:'type',title:'数据类型',width:100,align:'center', editor:{  
 		                type:'combobox',  
 		                options:{  
@@ -504,6 +505,7 @@ $(function(){
 		            {field:'id',title:'ID',width:100,align:'center'},  
 		            {field:'title',title:'字段名称',width:100,align:'center',editor:{type : 'text'}},  
 		  			{field:'field',title:'字段编码',width:100,align:'center',editor:{type : 'text'}},
+		  			{field:'sourceField',title:'对应数据源字段',width:100,align:'center',editor:{type : 'text'}},
 		  			{field:'sortable',title:'是否排序',width:100,align:'center', editor:{  
 		                type:'combobox',  
 		                options:{  

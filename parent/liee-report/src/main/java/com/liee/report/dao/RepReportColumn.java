@@ -5,7 +5,7 @@ import com.jdao.base.Table;
 import com.jdao.base.Fields;
 
 /**
- * @date 2016-12-09 16:20:34  dao for table rep_report_column
+ * @date 2016-12-30 11:03:23  dao for table rep_report_column
  */
 public class RepReportColumn extends Table<RepReportColumn> implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -26,6 +26,8 @@ public class RepReportColumn extends Table<RepReportColumn> implements Serializa
 	public final static Fields WIDTH = new Fields("`width`");
 	/**align*/
 	public final static Fields ALIGN = new Fields("`align`");
+	/**source_field*/
+	public final static Fields SOURCEFIELD = new Fields("`source_field`");
 
 	private int id = 0;
 	private int reportId = 0;
@@ -35,15 +37,16 @@ public class RepReportColumn extends Table<RepReportColumn> implements Serializa
 	private java.lang.String formatter;
 	private int width = 0;
 	private java.lang.String align;
+	private java.lang.String sourceField;
 
 	public RepReportColumn(){
 		super(TABLENAME_,RepReportColumn.class);
-		super.setFields(ID,REPORTID,TITLE,FIELD,SORTABLE,FORMATTER,WIDTH,ALIGN);
+		super.setFields(ID,REPORTID,TITLE,FIELD,SORTABLE,FORMATTER,WIDTH,ALIGN,SOURCEFIELD);
 	}
 
 	public RepReportColumn(String tableName4sharding){
 		super(tableName4sharding,RepReportColumn.class);
-		super.setFields(ID,REPORTID,TITLE,FIELD,SORTABLE,FORMATTER,WIDTH,ALIGN);
+		super.setFields(ID,REPORTID,TITLE,FIELD,SORTABLE,FORMATTER,WIDTH,ALIGN,SOURCEFIELD);
 	}
 
 	public int getId(){
@@ -109,5 +112,13 @@ public class RepReportColumn extends Table<RepReportColumn> implements Serializa
 	public void setAlign(java.lang.String align){
 		fieldValueMap.put(ALIGN, align);
 		 this.align=align;
+	}
+	public java.lang.String getSourceField(){
+		return this.sourceField;
+	}
+
+	public void setSourceField(java.lang.String sourceField){
+		fieldValueMap.put(SOURCEFIELD, sourceField);
+		 this.sourceField=sourceField;
 	}
 }

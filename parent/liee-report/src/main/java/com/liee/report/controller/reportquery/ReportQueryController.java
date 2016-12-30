@@ -151,6 +151,7 @@ public class ReportQueryController extends BaseController{
 		
 		if(paramList!=null && paramList.size() > 0){
 			for (RepReportParam param : paramList) {
+				String key  = StringUtil.isEmpty(param.getSourceCode())?param.getCode():param.getSourceCode();  //将 匹配源中的字段名 设置为key值，优先sourceCode，没有，就取code
 				String value = getRequestParameter(request, param.getCode());
 				Map<String,Object> obj = new HashMap<String,Object>();
 				switch (param.getType()) {
@@ -164,7 +165,7 @@ public class ReportQueryController extends BaseController{
 					break;
 				}
 				obj.put("compareWay", param.getCompareWay());  // 比较方式
-				paramMap.put(param.getCode(),obj);
+				paramMap.put(key,obj);
 			}
 		}
 		

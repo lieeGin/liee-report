@@ -35,6 +35,8 @@
         <tool class="org.apache.velocity.tools.generic.ResourceTool"/>
         <tool class="org.apache.velocity.tools.generic.SortTool"/>
         <tool class="org.apache.velocity.tools.generic.XmlTool"/>
+        <tool key="dataTimeUtil" class="com.liee.core.utils.DateTimeUtil" />
+        <tool key="stringUtil" class="com.liee.core.utils.StringUtil" />
     </toolbox>
     <toolbox scope="request">
         <tool class="org.apache.velocity.tools.generic.ContextTool"/>

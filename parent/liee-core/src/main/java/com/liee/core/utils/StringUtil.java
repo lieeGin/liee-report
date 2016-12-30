@@ -416,5 +416,13 @@ public class StringUtil {
 
 		return sb.toString();
 	}
+	
+	
+	public static boolean contains(String sourceStr,String matchStr){
+		if(sourceStr.indexOf(matchStr)!=-1){
+			return true;
+		}
+		return false;
+	}
 
 }

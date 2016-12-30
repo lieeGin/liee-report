@@ -77,13 +77,13 @@
 						   <td>${param.name}：</td>
 	  						<td>
 	  							 #if ( $param.widgetType=="text" )
-	  								<input name="${params.code}" type="text" class="easyui-validatebox" />
+	  								<input name="$param.code" type="text" class="easyui-validatebox" />
 	  							 #end
 	  							 #if ( $param.widgetType=="number" )
-	  								<input name="${params.code}" type="text" class="easyui-numberbox" />
+	  								<input name="$param.code" type="text" class="easyui-numberbox" />
 	  							 #end
 	  							 #if ( $param.widgetType=="select" )
-	  								<select name="${params.code}" type="text" class="easyui-combobox"  style="width:120px;"> </select>
+	  								<select name="$param.code" type="text" class="easyui-combobox"  style="width:120px;"> </select>
 	  							 #end
 	  						</td>
 						#end
@@ -91,9 +91,32 @@
 			  	 	 </tr>
 	  		 	</table>
 			  </form>
-	  		<div style="width:98%;height:90%;margin:10 10 10 10">
+			  
+			  
+			  <div id="myTabs" class="easyui-tabs" style="width:100%;height:100%;" fit="true">
+			  $stringUtil.getSafeString($report.reportShowWay,"0")
+			   #if($stringUtil.contains($report.reportShowWay,"0"))
+			    <div title="表格" id="gridResult" style="padding:20px;">
+					<div style="width:98%;height:90%;margin:10 10 10 10">
+		  				<table id="dataGrid" class="esayui"></table>
+	  			   </div>
+			    </div>
+			    #end
+			     #if($stringUtil.contains($report.reportShowWay,"1"))
+			    <div title="柱状图" id="barResult" data-options="" >
+					tab2
+			    </div>
+			    #end
+			     #if($stringUtil.contains($report.reportShowWay,"2"))
+			    <div title="曲线图" id="lineResult" data-options="" >
+					tab3
+			    </div>
+			    #end
+			</div>
+			  
+	  		<!-- <div style="width:98%;height:90%;margin:10 10 10 10">
 		  		<table id="dataGrid" class="esayui"></table>
-	  		</div>
+	  		</div> -->
 		</div>
   </body>
 </html>

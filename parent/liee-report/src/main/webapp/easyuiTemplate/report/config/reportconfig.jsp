@@ -40,8 +40,8 @@
 	  			<form id="editForm" >
 	  				<table style="width:100%">
 	  					<tr>
-	  						<td style="width:50%;top:0px;" rowspan="2" >
-			  					<table class="tableStyle" style="width:100%">
+	  						<td style="width:50%;top:0px;" rowspan="2"  valign="top">
+			  					<table class="tableStyle" style="width:100%;top:0px">
 			  						<tr>
 			  							<td align="right" class="tdStyle">名称:</td>
 			  							<td align="left" class="tdStyle">
