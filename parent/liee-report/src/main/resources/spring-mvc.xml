@@ -96,6 +96,9 @@
          <property name="order" value="0" />
          <property name="prefix" value="/"/>
          
+         <!-- 重写 -->
+         <property name="viewClass" value="com.liee.report.velocity.VelocityToolbox20View"/>
+           
          <property name="toolboxConfigLocation" value="/WEB-INF/classes/tools.xml" /><!--toolbox配置文件路径-->  
          <property name="dateToolAttribute" value="date" /><!--日期函数名称-->  
          <property name="numberToolAttribute" value="number" /><!--数字函数名称-->  

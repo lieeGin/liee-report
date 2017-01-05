@@ -172,7 +172,7 @@ $(function() {
 		var authLevels = [{"text":"只读","value":"1"},{"text":"读写","value":"2"}];  //  暂时固定
 		
 		$("#authGrid").datagrid({
-			height : 100,
+			height : 300,
 			url : sysUtil.bp() + '/role/getRoleMenu?roleId='+roleId,
 			fitColumns : true,
 			border : true,
@@ -258,6 +258,7 @@ $(function() {
 		width : 700,
 		modal : true,
 		resizable : true,
+		fit : true,
 		title : '分配菜单权限',
 		closed : true,
 		buttons : [{

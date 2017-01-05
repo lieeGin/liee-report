@@ -56,7 +56,7 @@
 	  		</div>
 	  		
 	  		
-	 	 <div id="authDialog" class="easyui-dialog" style="width:500px;height:400px;" title="分配权限" style="dispaly:none">
+	 	 <div id="authDialog" class="easyui-dialog" title="分配权限" style="dispaly:none">
 	 			<form id="authForm" style="height:100%" >
 	  					<table class="tableStyle">
 	  						<tr>
@@ -65,7 +65,7 @@
 	  							<td align="left" class="tdStyle" style="width:40%">已授权菜单:</td>
 	  						</tr>
 	  						
-	  						<tr style="height: 300px;">
+	  						<tr style="height: 500px;">
 	  							<td align="left" class="tdStyle" style="width:240px;vertical-align:top;">
 	  								<ul id="menuTree" class="easyui-tree"></ul>
 	  							</td>
@@ -86,7 +86,7 @@
 	  									<a href="#" id="removeOne" class="easyui-linkbutton" >&lt;</a>
 	  								</div>
 	  							</td>
-	  							<td align="left" class="tdStyle" style="width:440px">
+	  							<td align="left" class="tdStyle" style="width:440px"  valign="top">
 	  								<table id="authGrid" class="esayui"></table>
 								</td>
 	  						</tr>
