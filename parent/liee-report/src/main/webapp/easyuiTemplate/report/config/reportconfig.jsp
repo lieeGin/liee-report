@@ -43,14 +43,14 @@
 	  						<td style="width:50%;top:0px;" rowspan="2"  valign="top">
 			  					<table class="tableStyle" style="width:100%;top:0px">
 			  						<tr>
-			  							<td align="right" class="tdStyle">名称:</td>
-			  							<td align="left" class="tdStyle">
+			  							<td align="right" class="tdStyle" style="width:20%">名称:</td>
+			  							<td align="left" class="tdStyle" style="width:30%">
 			  								<input type="hidden" name="id">
 			  								<input type="hidden" name="groovyFile">
 			  								<input type="text" name="name" class="easyui-validatebox" required="true" style="font-size:12px;width:150px;"/>
 			  							</td>
-			  							<td align="right" class="tdStyle">编号:</td>
-			  							<td align="left" class="tdStyle">
+			  							<td align="right" class="tdStyle" style="width:20%">编号:</td>
+			  							<td align="left" class="tdStyle"  style="width:30%">
 			  								<input type="text" name="code" class="easyui-validatebox" required="true" style="font-size:12px;width:150px;"/>
 			  							</td>
 			  						</tr>
@@ -72,13 +72,54 @@
 			  						<tr>
 			  							<td align="right" class="tdStyle">展示模式:</td>
 			  							<td align="left" class="tdStyle" colspan="3">
-			  								    <input type="checkbox" name="reportShowWay" value="0"   />表格
-								                <input type="checkbox" name="reportShowWay" value="1"  />柱状图<br />
-								                <input type="checkbox" name="reportShowWay" value="2" />曲线图
-								                <input type="checkbox" name="reportShowWay" value="3"  />雷达图<br />
-								                <input type="checkbox" name="reportShowWay" value="4"  />饼图
+			  								    <input type="checkbox" name="reportShowWay" value="0"  />表格&nbsp;&nbsp;&nbsp;
+								                <input type="checkbox" name="reportShowWay" value="1" id="columnCheckbox"  onclick="columnSelect()"/>柱状图 &nbsp;&nbsp;&nbsp;
+								                <input type="checkbox" name="reportShowWay" value="2" id="lineCheckbox" onclick="lineSelect()"/>曲线图&nbsp;&nbsp;&nbsp;
+								                <input type="checkbox" name="reportShowWay" value="3" id="areaCheckbox" onclick="areaSelect()" />面积图 &nbsp;&nbsp;&nbsp;
+								                <input type="checkbox" name="reportShowWay" value="4" id="pieCheckbox" onclick="pieSelect()"/>饼图&nbsp;&nbsp;&nbsp;
 			  							</td>
 			  						</tr>
+			  						<tr class="column" style="display:none">
+			  							<td align="right" class="tdStyle"></td>
+			  							<td align="left" class="tdStyle" colspan="3"><b>柱状图配置</b>:</td>
+			  						</tr>
+			  						<tr class="column" style="display:none">  <!-- 柱状图标识 -->
+			  							<td align="right" class="tdStyle">柱状图X轴值来源：</td>
+			  							<td align="left" class="tdStyle" >
+			  								<select name ="cxvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
+			  									<option value="columnName"> 某些列名(集合)</option>
+			  									<option value="columnValue">某列的值</option>
+			  								</select>
+			  							</td>
+			  							<td align="right" class="tdStyle">柱状图X轴对应列名：</td>
+			  							<td align="left" class="tdStyle">
+			  								<input type="text" name="cxvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  							</td>
+			  						</tr>
+			  						<tr class="column" style="display:none">  <!-- 柱状图标识 -->
+			  								<td align="right" class="tdStyle">柱状图Y轴值来源：</td>
+											<td align="left" class="tdStyle" >
+				  								<select name ="cyvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
+			  									<option value="columnName"> 某些列名(集合)</option>
+			  									<option value="columnValue">某列的值</option>
+			  								</select>
+				  							</td>
+			  								<td align="right" class="tdStyle">柱状图Y轴对应列名：</td>
+				  							<td align="left" class="tdStyle">
+			  									<input type="text" name="cyvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+				  							</td>
+			  						</tr>
+			  						<tr class="column" style="display:none">  <!-- 柱状图标识 -->
+			  							<td align="right" class="tdStyle">柱状图Y轴Title：</td>
+			  							<td align="left" class="tdStyle" >
+			  								<input type="text" name="cytitle" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  							</td>
+			  							<td align="right" class="tdStyle">柱状图Y轴单位:</td>
+			  							<td align="left" class="tdStyle" >
+			  								<input type="text" name="cyunit" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  							</td>
+			  						</tr>
+			  						
 			  						<tr>
 			  							<td align="right" class="tdStyle">groovy脚本:</td>
 			  							<td align="left" class="tdStyle"  colspan="3">

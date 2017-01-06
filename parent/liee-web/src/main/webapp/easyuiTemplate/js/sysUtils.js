@@ -6,10 +6,10 @@
 var sysUtil = $.extend({}, sysUtil);/* 全局对象 */
 
 $.parser.onComplete = function() {/* 页面所有easyui组件渲染成功后，隐藏等待信息 */
-	if ($.browser.msie && $.browser.version < 7) {/* 解决IE6的PNG背景不透明BUG */
+	/*if ($.browser.msie && $.browser.version < 7) { 解决IE6的PNG背景不透明BUG 
 		sy.pngFun();
 		sy.bgPngFun($('span'));
-	}
+	}*/
 	window.setTimeout(function() {
 		$.messager.progress('close');
 	}, 1000);

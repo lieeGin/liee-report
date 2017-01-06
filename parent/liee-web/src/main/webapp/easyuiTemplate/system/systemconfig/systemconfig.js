@@ -155,7 +155,7 @@ $(function(){
 			}]
 		});
 		
-		$('#select').live('click',function(){
+		$('#select').on('click',function(){
         	var queryParams = $('#selectForm').form('serialize');
  			dataGrid.datagrid('options').queryParams= queryParams;   
  			dataGrid.data().datagrid.cache = null; 

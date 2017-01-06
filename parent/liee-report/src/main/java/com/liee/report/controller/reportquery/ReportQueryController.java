@@ -19,6 +19,7 @@ import com.liee.core.common.BasePageModel;
 import com.liee.core.common.BaseReturnModel;
 import com.liee.core.controller.BaseController;
 import com.liee.core.utils.StringUtil;
+import com.liee.report.common.ColumnResult;
 import com.liee.report.dao.RepReport;
 import com.liee.report.dao.RepReportColumn;
 import com.liee.report.dao.RepReportParam;
@@ -56,6 +57,7 @@ public class ReportQueryController extends BaseController{
 	 * @return
 	 */
 	public List<RepReportColumn> getColumns(int reportId){
+		// 考虑添加到redis  TODO 
 		List<RepReportColumn> list = new  ArrayList<RepReportColumn>();
 		try{
 			if(reportId>0){
@@ -77,6 +79,7 @@ public class ReportQueryController extends BaseController{
 	 * @return
 	 */
 	public List<RepReportParam> getParams(int reportId){
+		// 考虑添加到redis  TODO 
 		List<RepReportParam> list = new  ArrayList<RepReportParam>();
 		try{
 			if(reportId>0){
@@ -97,6 +100,7 @@ public class ReportQueryController extends BaseController{
 	 * @return
 	 */
 	public RepReport getReport(String code){
+		// 考虑添加到redis  TODO 
 		RepReport r = null;
 		try{
 			RepReport q = new RepReport();
@@ -170,6 +174,27 @@ public class ReportQueryController extends BaseController{
 		}
 		
 		return paramMap;
+	}
+	
+	
+	
+	@RequestMapping(value = "/get{code}ColumnChartData", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public BaseReturnModel getColumnChartData(HttpServletRequest request,@PathVariable String code) {
+		BaseReturnModel br = new BaseReturnModel();
+		
+		RepReport r = getReport(code);
+		List<RepReportParam> paramList = getParams(r.getId());
+		List<RepReportColumn> columnList = getColumns(r.getId());
+		
+		// 获得查询参数
+		Map<String,Object> paramValue = getParamValueFromRequest(request,paramList);  
+		
+		ColumnResult result = reportQueryService.queryColumnChartData(r,columnList,paramValue);
+		
+		br.setSuccess(true);
+		br.setObj(result);
+		return br;
 	}
 	
 	

@@ -2,7 +2,7 @@
 			InitLeftMenu();
 			tabClose();
 			tabCloseEven();
-			$('#loginOut').live("click",function(){
+			$('#loginOut').on("click",function(){
 				$.ajax({  
 	        		type: "post",  
 	        		url: sysUtil.bp()+"/admin/logout",                        
@@ -46,7 +46,7 @@
 	 				}]
 		        });
 			
-			$('#updatePwd').live("click",function(){
+			$('#updatePwd').on("click",function(){
 				pwdDialog.dialog("open");
 			});
 		});

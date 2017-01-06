@@ -177,10 +177,15 @@ $(function(){
 						editForm.form('clear');
 						editForm.form('load',data.obj.report);
 						$("#groovyStr").val(data.obj.groovyStr);
-						// 
+						hljs.highlightBlock($("#codeArea code")[0]);
+						
+						console.log(data.obj.report);
 						
 						paramGridQuery(row.id);
 						columnGridQuery(row.id);
+						
+						// 选择的类型
+						columnSelect();
 						
 						editDialog.dialog("open");
 						
@@ -324,7 +329,7 @@ $(function(){
 			return "";
 		}
 		
-		$('#select').live('click',function(){
+		$('#select').on('click',function(){
         	var queryParams = $('#selectForm').form('serialize');
  			dataGrid.datagrid('options').queryParams= queryParams;   
  			dataGrid.data().datagrid.cache = null; 
@@ -602,4 +607,23 @@ function changeShow(type){
 		$("#codeArea").hide();
 	}
 }
+
+
+/***
+ * 勾选柱状图
+ */
+function columnSelect(){
+	if($('#columnCheckbox').prop("checked")){  // 选中
+		$(".column").show();
+	}else{
+		 //未选中
+		$("#CXValueFrom").combobox("setValue","");
+		$("#CYValueFrom").combobox("setValue","");
+		$("#CYTitle").val();
+		$("#CYUnit").val();
+		$(".column").hide();
+	}
+	
+}
+
 		

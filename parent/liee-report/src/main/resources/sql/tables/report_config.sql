@@ -6,6 +6,12 @@ CREATE TABLE `rep_report` (
   `api_address` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '调用接口地址 数据来源是程序接口时使用',
   `groovy_file` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '数据查询groovy 数据来源是groovy查询时使用',
   `report_show_way` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '报表展示模式 (表格 0 ,柱状图 1 , 混合1,2等)',
+  `c_x_value_from` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图x轴值来源类型：columnName 某些列名(集合) ,  columnValue 某列的值',
+  `c_x_value` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图x轴值来源,与类型对应:某些列名(逗号分割)，某一列名称',
+  `c_y_value_from` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图y轴值来源类型：columnName 某些列名(集合) ,  columnValue 某列的值',
+  `c_y_value` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图y轴值来源,与类型对应:某些列名(逗号分割)，某一列名称',
+  `c_y_title` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图y轴title',
+  `c_y_unit` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图y轴刻度单位，例如：米，个，元等',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='自定义报表头';
 

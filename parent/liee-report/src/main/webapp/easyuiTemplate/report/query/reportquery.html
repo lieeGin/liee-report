@@ -1,8 +1,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    #parse("/easyuiTemplate/head.html")  
-	<script>
+<head>
+#parse("/easyuiTemplate/head.html")
+<style type="text/css">
+${
+demo
+
+
+.css
+
+
+}
+</style>
+<script>
 	   // 权限控制使用到以下2个参数
   		var authLevel="${authLevel}";
   		var menuId="${menuId}";
@@ -10,113 +20,217 @@
   		$(function(){
   			
   			// 初始化表格
-  			dataGrid = $('#dataGrid').datagrid({  
-  		        url: sysUtil.bp()+'/reportQuery/get'+'${report.code}'+'GridData',
-  		        fitColumns:true,
-  		      	border:true,
-  		        singleSelect:true,
-  		        fit:true,
-  		    	columnsfit:true,
-  		        pagination:true,
-  		        pageSize:16,
-  		        pageList:[16,50,100,200],
-  		        loadFilter:function(data){
-  		        	var dataMeta = [];
-  					if (data.success){
-  						var list = data.obj.rows;
-  						dataMeta['total'] = data.obj.total;
-  						dataMeta['rows'] = list;
-  						return dataMeta;
-  					}else{
-  						dataMeta['total'] = 0;
-  						dataMeta['rows'] = [];
-  						$.messager.show({
-  							title : '错误',
-  							msg : data.errMsg,
-  							timeout : 3000
-  						});
-  					}
-  		        },  
-  		        columns:[[
-  					#foreach( $column in $gridColumns )
-  						 {field:'$column.field',title:'$column.title',width:'$column.width',align:'$column.align'
-  						  #if($column.formatter && $column.formatter!="")
-  							  ,formatter:function(val){
-  								  $column.formatter
-  					  			}
-  						  #end
-  						 }
-  						#if($velocityCount!=$gridColumns.size())
-  						,
-  						#end
-  					#end
-  		        ]],
-  		        toolbar:[]
-  			});
+  			#if($stringUtil.contains($report.reportShowWay,"0"))
+	  			dataGrid = $('#dataGrid').datagrid({  
+	  		        url: sysUtil.bp()+'/reportQuery/get'+'${report.code}'+'GridData',
+	  		        fitColumns:true,
+	  		      	border:true,
+	  		        singleSelect:true,
+	  		        fit:true,
+	  		    	columnsfit:true,
+	  		        pagination:true,
+	  		        pageSize:16,
+	  		        pageList:[16,50,100,200],
+	  		        loadFilter:function(data){
+	  		        	var dataMeta = [];
+	  					if (data.success){
+	  						var list = data.obj.rows;
+	  						dataMeta['total'] = data.obj.total;
+	  						dataMeta['rows'] = list;
+	  						return dataMeta;
+	  					}else{
+	  						dataMeta['total'] = 0;
+	  						dataMeta['rows'] = [];
+	  						$.messager.show({
+	  							title : '错误',
+	  							msg : data.errMsg,
+	  							timeout : 3000
+	  						});
+	  					}
+	  		        },  
+	  		        columns:[[
+	  					#foreach( $column in $gridColumns )
+	  						 {field:'$column.field',title:'$column.title',width:'$column.width',align:'$column.align'
+	  						  #if($column.formatter && $column.formatter!="")
+	  							  ,formatter:function(val){
+	  								  $column.formatter
+	  					  			}
+	  						  #end
+	  						 }
+	  						#if($velocityCount!=$gridColumns.size())
+	  						,
+	  						#end
+	  					#end
+	  		        ]],
+	  		        toolbar:[]
+	  			});
+  			#end
   			
   			
-  			$('#select').live('click',function(){
+  			//****************柱状图  begin********************//
+  			#if($stringUtil.contains($report.reportShowWay,"1"))
+  				
+  				var opt = {
+  					 chart: {
+  			            type: 'column'
+  			        },
+  			        title: {
+  			            text: '$report.name'
+  			        },
+  			        subtitle: {
+  			            text: ''
+  			        },
+  			        xAxis: {
+  			            categories: [
+  			                'Jan',
+  			                'Feb',
+  			                'Mar',
+  			                'Apr',
+  			                'May',
+  			                'Jun',
+  			                'Jul',
+  			                'Aug',
+  			                'Sep',
+  			                'Oct',
+  			                'Nov',
+  			                'Dec'
+  			            ],
+  			            crosshair: true
+  			        },
+  			        yAxis: {
+  			            min: 0,
+  			            title: {
+  			                text: '$report.cYTitle'
+  			            }
+  			        },
+  			        tooltip: {
+  			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+  			            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+  			                '<td style="padding:0"><b>{point.y:.1f} $report.cYUnit</b></td></tr>',
+  			            footerFormat: '</table>',
+  			            shared: true,
+  			            useHTML: true
+  			        },
+  			        plotOptions: {
+  			            column: {
+  			                pointPadding: 0.2,
+  			                borderWidth: 0
+  			            }
+  			        },
+  			        series: [{
+  			            name: 'Tokyo',
+  			            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+  			        }, {
+  			            name: 'New York',
+  			            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+  			        }, {
+  			            name: 'London',
+  			            data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+  			        }, {
+  			            name: 'Berlin',
+  			            data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+
+  			        }]
+  					
+  				};
+  			
+  				/**
+				* 查询柱状图数据
+				*/
+				function getColumnChartData(){
+					$.ajax({
+						type: "post",  
+						url: sysUtil.bp()+'/reportQuery/get'+'${report.code}'+'ColumnChartData',
+						data: $('#selectForm').form('serialize'),
+						contentType:"application/x-www-form-urlencoded;charset=UTF-8",
+						dataType:"json", 
+						success:function(data){
+							if(data.success){
+								// 封装数据
+								opt.xAxis.categories = data.obj.categories;
+								opt.series = data.obj.series;
+								Highcharts.chart('columnContainer', opt);
+							}
+						}
+					});
+				}
+  		    		
+  				getColumnChartData();
+  			
+  			#end
+  			
+  			
+  			
+  			
+  			//*****************柱状图  end********************//
+  			
+  			
+  			$('#select').on('click',function(){
   	        	var queryParams = $('#selectForm').form('serialize');
-  	 			dataGrid.datagrid('options').queryParams= queryParams;   
-  	 			dataGrid.data().datagrid.cache = null; 
-  				dataGrid.datagrid('load');
+  	        	// 表格
+  	        	#if($stringUtil.contains($report.reportShowWay,"0"))
+	  	 			dataGrid.datagrid('options').queryParams= queryParams;   
+	  	 			dataGrid.data().datagrid.cache = null; 
+	  				dataGrid.datagrid('load');
+  				#end
+  				
+  				// 柱状图
+  				#if($stringUtil.contains($report.reportShowWay,"1"))
+  					getColumnChartData();
+  				#end
   	        });
   		
   			
   		})
   		
   	</script>
-	
-  </head>
-  <body>
- <body class="easyui-layout" style="overflow:hidden" loadingMessage="请等待数据加载....." fit="true">
-	  	<div region="center" border="true">
-	  		 <form id="selectForm">
-  		 		<table style="font-size:12px;margin-left:10px;">
-	  		 		<tr>
-	  		 			#foreach( $param in $params )
-						   <td>${param.name}：</td>
-	  						<td>
-	  							 #if ( $param.widgetType=="text" )
-	  								<input name="$param.code" type="text" class="easyui-validatebox" />
-	  							 #end
-	  							 #if ( $param.widgetType=="number" )
-	  								<input name="$param.code" type="text" class="easyui-numberbox" />
-	  							 #end
-	  							 #if ( $param.widgetType=="select" )
-	  								<select name="$param.code" type="text" class="easyui-combobox"  style="width:120px;"> </select>
-	  							 #end
-	  						</td>
-						#end
-			  	 	 	<td><a href="javascript:void(0)" plain="true" id="select" class="easyui-linkbutton" iconCls="icon-search">查询</a> </td>
-			  	 	 </tr>
-	  		 	</table>
-			  </form>
-			  
-			  
-			  <div id="myTabs" class="easyui-tabs" style="width:100%;height:100%;" fit="true">
-			   #if($stringUtil.contains($report.reportShowWay,"0"))
-			    <div title="表格" id="gridResult" style="padding:20px;">
-					<div style="width:98%;height:90%;margin:10 10 10 10">
-		  				<table id="dataGrid" class="esayui"></table>
-	  			   </div>
-			    </div>
-			    #end
-			     #if($stringUtil.contains($report.reportShowWay,"1"))
-			    <div title="柱状图" id="barResult" data-options="" >
-					tab2
-			    </div>
-			    #end
-			     #if($stringUtil.contains($report.reportShowWay,"2"))
-			    <div title="曲线图" id="lineResult" data-options="" >
-					tab3
-			    </div>
-			    #end
+
+</head>
+<body>
+<body class="easyui-layout" style="overflow: hidden"
+	loadingMessage="请等待数据加载....." fit="true">
+	<div region="center" border="true">
+		<form id="selectForm">
+			<table style="font-size: 12px; margin-left: 10px;">
+				<tr>
+					#foreach( $param in $params )
+					<td>${param.name}：</td>
+					<td>#if ( $param.widgetType=="text" ) <input
+						name="$param.code" type="text" class="easyui-validatebox" /> #end
+						#if ( $param.widgetType=="number" ) <input name="$param.code"
+						type="text" class="easyui-numberbox" /> #end #if (
+						$param.widgetType=="select" ) <select name="$param.code"
+						type="text" class="easyui-combobox" style="width: 120px;">
+					</select> #end
+					</td> #end
+					<td><a href="javascript:void(0)" plain="true" id="select"
+						class="easyui-linkbutton" iconCls="icon-search">查询</a></td>
+				</tr>
+			</table>
+		</form>
+
+
+		<div id="myTabs" class="easyui-tabs"
+			style="width: 100%; height: 100%;" fit="true">
+			#if($stringUtil.contains($report.reportShowWay,"0"))
+			<div title="表格" id="gridResult" style="padding: 20px;">
+				<div style="width: 98%; height: 90%; margin: 10 10 10 10">
+					<table id="dataGrid" class="esayui"></table>
+				</div>
 			</div>
-			  
-	  		<!-- <div style="width:98%;height:90%;margin:10 10 10 10">
-		  		<table id="dataGrid" class="esayui"></table>
-	  		</div> -->
+			#end #if($stringUtil.contains($report.reportShowWay,"1"))
+			<div title="柱状图" id="barResult" data-options="">
+				<div id="columnContainer"
+					style="width: 800px; height: 400px; margin: 0 auto"></div>
+			</div>
+			#end #if($stringUtil.contains($report.reportShowWay,"2"))
+			<div title="曲线图" id="lineResult" data-options="">tab3</div>
+			#end
 		</div>
-  </body>
+
+	</div>
+</body>
 </html>

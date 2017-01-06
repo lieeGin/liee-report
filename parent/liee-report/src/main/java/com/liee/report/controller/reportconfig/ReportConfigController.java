@@ -133,6 +133,15 @@ public class ReportConfigController extends BaseController{
 		String reportShowWay = StringUtil.nullToString(getRequestParameter(request, "reportShowWay"));
 		String groovyFile = StringUtil.nullToString(getRequestParameter(request, "groovyFile"));
 		
+		
+		String cXValueFrom = StringUtil.nullToString(getRequestParameter(request, "cxvalueFrom"));
+		String cXValue = StringUtil.nullToString(getRequestParameter(request, "cxvalue"));
+		String cYValueFrom = StringUtil.nullToString(getRequestParameter(request, "cyvalueFrom"));
+		String cYValue = StringUtil.nullToString(getRequestParameter(request, "cyvalue"));
+		String cYTitle = StringUtil.nullToString(getRequestParameter(request, "cytitle"));
+		String cYUnit = StringUtil.nullToString(getRequestParameter(request, "cyunit"));
+
+		
 		RepReport report = new RepReport();
 		report.setId(id);
 		report.setApiAddress(apiAddress);
@@ -141,6 +150,13 @@ public class ReportConfigController extends BaseController{
 		report.setDataSource(dataSource);
 		report.setReportShowWay(reportShowWay);
 		report.setGroovyFile(groovyFile);
+		
+		report.setCXValueFrom(cXValueFrom);
+		report.setCXValue(cXValue);
+		report.setCYValueFrom(cYValueFrom);
+		report.setCYValue(cYValue);
+		report.setCYTitle(cYTitle);
+		report.setCYUnit(cYUnit);
 		
 		return report;
 	}

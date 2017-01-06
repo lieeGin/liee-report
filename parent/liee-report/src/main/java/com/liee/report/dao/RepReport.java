@@ -5,7 +5,7 @@ import com.jdao.base.Table;
 import com.jdao.base.Fields;
 
 /**
- * @date 2016-12-12 18:18:45  dao for table rep_report
+ * @date 2017-01-06 11:42:41  dao for table rep_report
  */
 public class RepReport extends Table<RepReport> implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -24,6 +24,18 @@ public class RepReport extends Table<RepReport> implements Serializable{
 	public final static Fields GROOVYFILE = new Fields("`groovy_file`");
 	/**report_show_way*/
 	public final static Fields REPORTSHOWWAY = new Fields("`report_show_way`");
+	/**c_x_value_from*/
+	public final static Fields CXVALUEFROM = new Fields("`c_x_value_from`");
+	/**c_y_value_from*/
+	public final static Fields CYVALUEFROM = new Fields("`c_y_value_from`");
+	/**c_y_title*/
+	public final static Fields CYTITLE = new Fields("`c_y_title`");
+	/**c_y_unit*/
+	public final static Fields CYUNIT = new Fields("`c_y_unit`");
+	/**c_x_value*/
+	public final static Fields CXVALUE = new Fields("`c_x_value`");
+	/**c_y_value*/
+	public final static Fields CYVALUE = new Fields("`c_y_value`");
 
 	private int id = 0;
 	private java.lang.String name;
@@ -32,15 +44,21 @@ public class RepReport extends Table<RepReport> implements Serializable{
 	private java.lang.String apiAddress;
 	private java.lang.String groovyFile;
 	private java.lang.String reportShowWay;
+	private java.lang.String cXValueFrom;
+	private java.lang.String cYValueFrom;
+	private java.lang.String cYTitle;
+	private java.lang.String cYUnit;
+	private java.lang.String cXValue;
+	private java.lang.String cYValue;
 
 	public RepReport(){
 		super(TABLENAME_,RepReport.class);
-		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY);
+		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY,CXVALUEFROM,CYVALUEFROM,CYTITLE,CYUNIT,CXVALUE,CYVALUE);
 	}
 
 	public RepReport(String tableName4sharding){
 		super(tableName4sharding,RepReport.class);
-		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY);
+		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY,CXVALUEFROM,CYVALUEFROM,CYTITLE,CYUNIT,CXVALUE,CYVALUE);
 	}
 
 	public int getId(){
@@ -98,5 +116,53 @@ public class RepReport extends Table<RepReport> implements Serializable{
 	public void setReportShowWay(java.lang.String reportShowWay){
 		fieldValueMap.put(REPORTSHOWWAY, reportShowWay);
 		 this.reportShowWay=reportShowWay;
+	}
+	public java.lang.String getCXValueFrom(){
+		return this.cXValueFrom;
+	}
+
+	public void setCXValueFrom(java.lang.String cXValueFrom){
+		fieldValueMap.put(CXVALUEFROM, cXValueFrom);
+		 this.cXValueFrom=cXValueFrom;
+	}
+	public java.lang.String getCYValueFrom(){
+		return this.cYValueFrom;
+	}
+
+	public void setCYValueFrom(java.lang.String cYValueFrom){
+		fieldValueMap.put(CYVALUEFROM, cYValueFrom);
+		 this.cYValueFrom=cYValueFrom;
+	}
+	public java.lang.String getCYTitle(){
+		return this.cYTitle;
+	}
+
+	public void setCYTitle(java.lang.String cYTitle){
+		fieldValueMap.put(CYTITLE, cYTitle);
+		 this.cYTitle=cYTitle;
+	}
+	public java.lang.String getCYUnit(){
+		return this.cYUnit;
+	}
+
+	public void setCYUnit(java.lang.String cYUnit){
+		fieldValueMap.put(CYUNIT, cYUnit);
+		 this.cYUnit=cYUnit;
+	}
+	public java.lang.String getCXValue(){
+		return this.cXValue;
+	}
+
+	public void setCXValue(java.lang.String cXValue){
+		fieldValueMap.put(CXVALUE, cXValue);
+		 this.cXValue=cXValue;
+	}
+	public java.lang.String getCYValue(){
+		return this.cYValue;
+	}
+
+	public void setCYValue(java.lang.String cYValue){
+		fieldValueMap.put(CYVALUE, cYValue);
+		 this.cYValue=cYValue;
 	}
 }
