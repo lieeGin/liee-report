@@ -1,6 +1,6 @@
 groovy报表查询方式使用说明：
 
-1、groovy脚本中需要包含getData 方法，该方法为查询的入口，入参是map形式的查询参数。
+1、groovy脚本中需要包含getData(返回分页对象，包含数据集合和数据总条数) ，getList(只返回数据集合)方法，该方法为查询的入口，入参是map形式的查询参数。
 	def getData(param){
 		...
 	}

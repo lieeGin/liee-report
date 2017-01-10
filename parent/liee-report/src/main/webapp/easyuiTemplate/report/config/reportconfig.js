@@ -74,8 +74,9 @@ $(function(){
         			editDialog.dialog({'title':"新增"});
         			editForm.form('clear');
         			
-        			initParamGrid(0);  // 参数表格
-        			initColumnGrid(0);  // 结果列 表格
+        			changeShow(2);
+        			paramGridQuery(0);  // 参数表格
+        			columnGridQuery(0);  // 结果列 表格
         			
         			editDialog.dialog("open");
         		}
@@ -86,6 +87,7 @@ $(function(){
         			$('#errorMessage').html('');
         			var row = dataGrid.datagrid('getSelected');
         			if(row){
+        				changeShow(2);
         				setDataEdit(row);
     				}else{
     					$.messager.show({

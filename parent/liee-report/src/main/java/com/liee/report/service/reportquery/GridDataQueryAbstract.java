@@ -60,4 +60,5 @@ public abstract class GridDataQueryAbstract implements GridDataQueryInterface{
 	 */
 	protected abstract List<Map<String,Object>> getDataList(Map<String,Object> queryResult,List<RepReportColumn> resultColumn); 
 	
+	
 }

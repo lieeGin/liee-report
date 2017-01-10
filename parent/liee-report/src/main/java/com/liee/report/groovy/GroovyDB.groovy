@@ -83,11 +83,11 @@ class GroovyDB{
 		def str="";
 		param.each{
 		  key , value ->
-		  if("${value.compareWay}" == "like"){
+		  if("${value.compareWay}" == "like" && "${value.value}" !=""){
 			  str+=" and ${key} ${value.compareWay} '%${value.value}%' "
-		  }else if("${value.compareWay}" == "in"){
+		  }else if("${value.compareWay}" == "in"&& "${value.value}" !=""){
 			  str+=" and ${key} ${value.compareWay} (${value.value}) "
-		  }else{
+		  }else if("${value.value}" !=""){
 			  str+=" and ${key} ${value.compareWay} ${value.value} "
 		  }
 	    }
@@ -98,7 +98,7 @@ class GroovyDB{
 	
 	def getOrderBy(sort,order){
 		def str="";
-		if(sort!="" && order!=""){
+		if(sort!="" && order!="" && sort!=null && order!=null  && sort!="null" && order!="null"){
 			str = " order by "+sort +" "+ order;
 		}
 		return str;
@@ -107,7 +107,7 @@ class GroovyDB{
 	
 	def getLimit(pageNum,pageSize){
 		def str="";
-		if(pageNum!="" && pageSize!="" && pageNum.isInteger() && pageSize.isInteger()){
+		if(pageNum!="" && pageSize!="" && pageNum.isInteger() && pageSize.isInteger() && Integer.parseInt(pageNum)!=0 && Integer.parseInt(pageSize)!=0){
 			str = " limit "+(Integer.parseInt(pageNum)-1)*Integer.parseInt(pageSize)+" , "+pageSize;
 		}
 		return str;

@@ -1,5 +1,7 @@
 package com.liee.report.common;
 
+import java.math.BigDecimal;
+
 /**
  * 柱状图数据对象
  * @author lieeGin
@@ -10,7 +12,7 @@ public class ColumnSerie {
 	
 	private String name;
 	
-	private Double[] data;
+	private BigDecimal[] data;
 
 	public String getName() {
 		return name;
@@ -20,11 +22,11 @@ public class ColumnSerie {
 		this.name = name;
 	}
 
-	public Double[] getData() {
+	public BigDecimal[] getData() {
 		return data;
 	}
 
-	public void setData(Double[] data) {
+	public void setData(BigDecimal[] data) {
 		this.data = data;
 	}
 	

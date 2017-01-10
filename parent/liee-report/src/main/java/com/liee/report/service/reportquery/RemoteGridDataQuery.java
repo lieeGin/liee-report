@@ -31,4 +31,10 @@ public class RemoteGridDataQuery extends GridDataQueryAbstract{
 		return null;
 	}
 
+	@Override
+	public List<Map<String, Object>> queryList(Map<String, Object> paramValue, List<RepReportColumn> resultColumn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -55,6 +55,11 @@ public class GroovyGridDataQuery extends GridDataQueryAbstract{
 	@Override
 	public List<Map<String, Object>> getDataList(Map<String, Object> queryResult, List<RepReportColumn> resultColumn) {
 		List<Map<String, Object>> list =  (List<Map<String, Object>>)queryResult.get("rows");
+		List<Map<String,Object>> afterList = getListByColumn(list,resultColumn);
+		return afterList;
+	}
+	
+	public List<Map<String,Object>> getListByColumn(List<Map<String, Object>> list, List<RepReportColumn> resultColumn){
 		List<Map<String,Object>> afterList = new ArrayList<Map<String,Object>>();
 		for (Map<String,Object> map : list) {
 			Map<String,Object> newMap = new HashMap<String,Object>();
@@ -68,6 +73,13 @@ public class GroovyGridDataQuery extends GridDataQueryAbstract{
 			afterList.add(newMap);
 		}
 		
+		return afterList;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryList(Map<String, Object> paramValue, List<RepReportColumn> resultColumn) {
+		List<Map<String, Object>> list = (List<Map<String,Object>>) groovyObject.invokeMethod("getList", paramValue);    
+		List<Map<String,Object>> afterList = getListByColumn(list,resultColumn);
 		return afterList;
 	}
 
