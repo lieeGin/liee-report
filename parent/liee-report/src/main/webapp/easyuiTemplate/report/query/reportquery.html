@@ -257,6 +257,11 @@ demo
   				#if($stringUtil.contains($report.reportShowWay,"1"))
   					getColumnChartData();
   				#end
+  				
+  				// 曲线图
+  				#if($stringUtil.contains($report.reportShowWay,"2"))
+  					getLineChartData();
+  				#end
   	        });
   		
   			
