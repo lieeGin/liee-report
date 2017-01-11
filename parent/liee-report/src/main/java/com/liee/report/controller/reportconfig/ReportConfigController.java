@@ -140,6 +140,14 @@ public class ReportConfigController extends BaseController{
 		String cYValue = StringUtil.nullToString(getRequestParameter(request, "cyvalue"));
 		String cYTitle = StringUtil.nullToString(getRequestParameter(request, "cytitle"));
 		String cYUnit = StringUtil.nullToString(getRequestParameter(request, "cyunit"));
+		
+		
+		String lXValueFrom = StringUtil.nullToString(getRequestParameter(request, "lxvalueFrom"));
+		String lXValue = StringUtil.nullToString(getRequestParameter(request, "lxvalue"));
+		String lYValueFrom = StringUtil.nullToString(getRequestParameter(request, "lyvalueFrom"));
+		String lYValue = StringUtil.nullToString(getRequestParameter(request, "lyvalue"));
+		String lYTitle = StringUtil.nullToString(getRequestParameter(request, "lytitle"));
+		String lYUnit = StringUtil.nullToString(getRequestParameter(request, "lyunit"));
 
 		
 		RepReport report = new RepReport();
@@ -157,6 +165,13 @@ public class ReportConfigController extends BaseController{
 		report.setCYValue(cYValue);
 		report.setCYTitle(cYTitle);
 		report.setCYUnit(cYUnit);
+		
+		report.setLXValueFrom(lXValueFrom);
+		report.setLXValue(lXValue);
+		report.setLYValueFrom(lYValueFrom);
+		report.setLYValue(lYValue);
+		report.setLYTitle(lYTitle);
+		report.setLYUnit(lYUnit);
 		
 		return report;
 	}

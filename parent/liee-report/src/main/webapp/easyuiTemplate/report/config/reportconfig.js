@@ -619,13 +619,34 @@ function columnSelect(){
 		$(".column").show();
 	}else{
 		 //未选中
-		$("#CXValueFrom").combobox("setValue","");
-		$("#CYValueFrom").combobox("setValue","");
-		$("#CYTitle").val();
-		$("#CYUnit").val();
+		$("#cxvalueFrom").combobox("setValue","");
+		$("#cxvalue").val("");
+		$("#cyvalueFrom").combobox("setValue","");
+		$("#cyvalue").val("");
+		$("#cytitle").val("");
+		$("#cyunit").val("");
 		$(".column").hide();
 	}
 	
+}
+
+/***
+ * 勾选曲线图
+ */
+function lineSelect(){
+	
+	if($('#lineCheckbox').prop("checked")){  // 选中
+		$(".line").show();
+	}else{
+		 //未选中
+		$("#lxvalueFrom").combobox("setValue","");
+		$("#lxvalue").val("");
+		$("#lyvalueFrom").combobox("setValue","");
+		$("#lyvalue").val("");
+		$("#lytitle").val("");
+		$("#lyunit").val("");
+		$(".line").hide();
+	}
 }
 
 		

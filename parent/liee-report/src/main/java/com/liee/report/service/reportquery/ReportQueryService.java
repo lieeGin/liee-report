@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.liee.core.common.BasePageModel;
 import com.liee.core.exception.BaseException;
 import com.liee.core.service.BaseService;
-import com.liee.report.common.ColumnResult;
-import com.liee.report.common.ColumnSerie;
+import com.liee.report.common.ChartResult;
+import com.liee.report.common.ChartSerie;
 import com.liee.report.dao.RepReport;
 import com.liee.report.dao.RepReportColumn;
 
@@ -91,8 +91,8 @@ public class ReportQueryService  extends BaseService {
 	 * @param paramValue
 	 * @return
 	 */
-	public ColumnResult queryColumnChartData(RepReport report,List<RepReportColumn> columnList,Map<String,Object> paramValue ){
-		ColumnResult result = new ColumnResult();
+	public ChartResult<ChartSerie> queryColumnChartData(RepReport report,List<RepReportColumn> columnList,Map<String,Object> paramValue ){
+		ChartResult<ChartSerie> result = new ChartResult<ChartSerie>();
 		try {
 			GridDataQueryAbstract query;
 			// 判断报表来源
@@ -140,17 +140,17 @@ public class ReportQueryService  extends BaseService {
 	 * @param dataList
 	 * @return
 	 */
-	public ColumnResult getResultFromX(String cXValue,String cYValue,List<Map<String,Object>> dataList,List<RepReportColumn> columnList){
-		ColumnResult result = new ColumnResult();
+	public ChartResult<ChartSerie> getResultFromX(String XValue,String YValue,List<Map<String,Object>> dataList,List<RepReportColumn> columnList){
+		ChartResult<ChartSerie> result = new ChartResult<ChartSerie>();
 	
-		List<ColumnSerie> series = new ArrayList<ColumnSerie>();
+		List<ChartSerie> series = new ArrayList<ChartSerie>();
 		
-		String[] xcs = cXValue.split(",");
+		String[] xcs = XValue.split(",");
 	
 		for (Map<String,Object> map : dataList) {
 			BigDecimal[] datas = new BigDecimal[xcs.length];
-			ColumnSerie cs = new ColumnSerie();
-			cs.setName((String)map.get(cYValue));
+			ChartSerie cs = new ChartSerie();
+			cs.setName((String)map.get(YValue));
 			
 			if(xcs!=null && xcs.length>0){
 				for (int i = 0; i < xcs.length; i++) {
@@ -185,17 +185,17 @@ public class ReportQueryService  extends BaseService {
 	 * @param dataList
 	 * @return
 	 */
-	public ColumnResult getResultFromY(String cYValue,String cXValue,List<Map<String,Object>> dataList,List<RepReportColumn> columnList){
-		ColumnResult result = new ColumnResult();
+	public ChartResult<ChartSerie> getResultFromY(String YValue,String XValue,List<Map<String,Object>> dataList,List<RepReportColumn> columnList){
+		ChartResult<ChartSerie> result = new ChartResult<ChartSerie>();
 	
-		List<ColumnSerie> series = new ArrayList<ColumnSerie>();
+		List<ChartSerie> series = new ArrayList<ChartSerie>();
 		
 		String[] xcs = new String[dataList.size()];
-		String[] values = cYValue.split(",");
+		String[] values = YValue.split(",");
 		
 		for (int j = 0; j < values.length; j++) {
 			BigDecimal[] datas = new BigDecimal[values.length];
-			ColumnSerie cs = new ColumnSerie();
+			ChartSerie cs = new ChartSerie();
 			
 			for (RepReportColumn column : columnList) {
 				if(column.getField().equals(values[j])){
@@ -206,7 +206,7 @@ public class ReportQueryService  extends BaseService {
 			for (int i = 0; i < dataList.size(); i++) {
 				Map<String,Object> map = dataList.get(i);
 				datas[i] = (BigDecimal)map.get(values[j]);
-				xcs[i] = (String)map.get(cXValue);
+				xcs[i] = (String)map.get(XValue);
 			}
 			cs.setData(datas); 
 			series.add(cs);
@@ -215,6 +215,57 @@ public class ReportQueryService  extends BaseService {
 
 		result.setCategories(xcs);
 		result.setSeries(series);
+		return result;
+	}
+	
+	
+	
+	
+	/**
+	 * 将查询出来的列表数据封装为曲线图所需要的数据格式
+	 * @param sr
+	 * @param columnList
+	 * @param paramValue
+	 * @return
+	 */
+	public ChartResult<ChartSerie> queryLineChartData(RepReport report,List<RepReportColumn> columnList,Map<String,Object> paramValue ){
+		ChartResult<ChartSerie> result = new ChartResult<ChartSerie>();
+		try {
+			GridDataQueryAbstract query;
+			// 判断报表来源
+			int datasource = report.getDataSource();
+			if(datasource==0){
+				query = new GroovyGridDataQuery(report.getGroovyFile());
+			}else if(datasource==1){
+				query = new RemoteGridDataQuery();
+			}else{
+				query = new RemoteGridDataQuery();
+			}
+			
+			List<Map<String,Object>> dataList = query.queryList(paramValue,columnList);
+			
+			String lXValueFrom = report.getLXValueFrom();
+			String lXValue = report.getLXValue();
+			String lYValueFrom  = report.getLYValueFrom();   // 通过x轴判断。
+			String lYValue = report.getLYValue();
+			
+			switch(lXValueFrom){
+			case "columnName":
+				// x轴是指定了若干个列名，x轴一定是取某一列的值
+				result = getResultFromX(lXValue,lYValue,dataList,columnList);
+				break;
+			case "columnValue":
+				// x轴指定取某一列的值，y轴则默认一定是若干列的列名
+				result = getResultFromY(lYValue,lXValue,dataList,columnList);
+				break;
+				
+			}
+			
+		} catch (Exception e) {
+			log.error("分页查询错误",e);
+			throw new BaseException("分页查询错误", e);
+		}
+		
 		return result;
 	}
 	

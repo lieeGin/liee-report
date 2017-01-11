@@ -19,7 +19,8 @@ import com.liee.core.common.BasePageModel;
 import com.liee.core.common.BaseReturnModel;
 import com.liee.core.controller.BaseController;
 import com.liee.core.utils.StringUtil;
-import com.liee.report.common.ColumnResult;
+import com.liee.report.common.ChartResult;
+import com.liee.report.common.ChartSerie;
 import com.liee.report.dao.RepReport;
 import com.liee.report.dao.RepReportColumn;
 import com.liee.report.dao.RepReportParam;
@@ -190,7 +191,27 @@ public class ReportQueryController extends BaseController{
 		// 获得查询参数
 		Map<String,Object> paramValue = getParamValueFromRequest(request,paramList);  
 		
-		ColumnResult result = reportQueryService.queryColumnChartData(r,columnList,paramValue);
+		ChartResult<ChartSerie> result = reportQueryService.queryColumnChartData(r,columnList,paramValue);
+		
+		br.setSuccess(true);
+		br.setObj(result);
+		return br;
+	}
+	
+	
+	@RequestMapping(value = "/get{code}LineChartData", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public BaseReturnModel getLineChartData(HttpServletRequest request,@PathVariable String code) {
+		BaseReturnModel br = new BaseReturnModel();
+		
+		RepReport r = getReport(code);
+		List<RepReportParam> paramList = getParams(r.getId());
+		List<RepReportColumn> columnList = getColumns(r.getId());
+		
+		// 获得查询参数
+		Map<String,Object> paramValue = getParamValueFromRequest(request,paramList);  
+		
+		ChartResult<ChartSerie> result = reportQueryService.queryLineChartData(r,columnList,paramValue);
 		
 		br.setSuccess(true);
 		br.setObj(result);

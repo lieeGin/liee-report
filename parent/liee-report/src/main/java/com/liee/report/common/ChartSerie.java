@@ -3,11 +3,11 @@ package com.liee.report.common;
 import java.math.BigDecimal;
 
 /**
- * 柱状图数据对象
+ * 图形数据对象
  * @author lieeGin
  *
  */
-public class ColumnSerie {
+public class ChartSerie {
 
 	
 	private String name;

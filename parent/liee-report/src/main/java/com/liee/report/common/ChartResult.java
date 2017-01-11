@@ -3,16 +3,16 @@ package com.liee.report.common;
 import java.util.List;
 
 /**
- * 柱状图数据 查询结果
+ * 图形数据 查询结果
  * @author lieeGin
  *
  */
-public class ColumnResult {
+public class ChartResult<T extends ChartSerie> {
 
 	
 	private String[] categories;
 	
-	private List<ColumnSerie> series;
+	private List<T> series;
 
 	public String[] getCategories() {
 		return categories;
@@ -22,11 +22,11 @@ public class ColumnResult {
 		this.categories = categories;
 	}
 
-	public List<ColumnSerie> getSeries() {
+	public List<T> getSeries() {
 		return series;
 	}
 
-	public void setSeries(List<ColumnSerie> series) {
+	public void setSeries(List<T> series) {
 		this.series = series;
 	}
 	

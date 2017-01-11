@@ -5,7 +5,7 @@ import com.jdao.base.Table;
 import com.jdao.base.Fields;
 
 /**
- * @date 2017-01-06 11:42:41  dao for table rep_report
+ * @date 2017-01-11 11:13:44  dao for table rep_report
  */
 public class RepReport extends Table<RepReport> implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -36,6 +36,18 @@ public class RepReport extends Table<RepReport> implements Serializable{
 	public final static Fields CXVALUE = new Fields("`c_x_value`");
 	/**c_y_value*/
 	public final static Fields CYVALUE = new Fields("`c_y_value`");
+	/**l_x_value_from*/
+	public final static Fields LXVALUEFROM = new Fields("`l_x_value_from`");
+	/**l_x_value*/
+	public final static Fields LXVALUE = new Fields("`l_x_value`");
+	/**l_y_value_from*/
+	public final static Fields LYVALUEFROM = new Fields("`l_y_value_from`");
+	/**l_y_value*/
+	public final static Fields LYVALUE = new Fields("`l_y_value`");
+	/**l_y_title*/
+	public final static Fields LYTITLE = new Fields("`l_y_title`");
+	/**l_y_unit*/
+	public final static Fields LYUNIT = new Fields("`l_y_unit`");
 
 	private int id = 0;
 	private java.lang.String name;
@@ -50,15 +62,21 @@ public class RepReport extends Table<RepReport> implements Serializable{
 	private java.lang.String cYUnit;
 	private java.lang.String cXValue;
 	private java.lang.String cYValue;
+	private java.lang.String lXValueFrom;
+	private java.lang.String lXValue;
+	private java.lang.String lYValueFrom;
+	private java.lang.String lYValue;
+	private java.lang.String lYTitle;
+	private java.lang.String lYUnit;
 
 	public RepReport(){
 		super(TABLENAME_,RepReport.class);
-		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY,CXVALUEFROM,CYVALUEFROM,CYTITLE,CYUNIT,CXVALUE,CYVALUE);
+		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY,CXVALUEFROM,CYVALUEFROM,CYTITLE,CYUNIT,CXVALUE,CYVALUE,LXVALUEFROM,LXVALUE,LYVALUEFROM,LYVALUE,LYTITLE,LYUNIT);
 	}
 
 	public RepReport(String tableName4sharding){
 		super(tableName4sharding,RepReport.class);
-		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY,CXVALUEFROM,CYVALUEFROM,CYTITLE,CYUNIT,CXVALUE,CYVALUE);
+		super.setFields(ID,NAME,CODE,DATASOURCE,APIADDRESS,GROOVYFILE,REPORTSHOWWAY,CXVALUEFROM,CYVALUEFROM,CYTITLE,CYUNIT,CXVALUE,CYVALUE,LXVALUEFROM,LXVALUE,LYVALUEFROM,LYVALUE,LYTITLE,LYUNIT);
 	}
 
 	public int getId(){
@@ -164,5 +182,53 @@ public class RepReport extends Table<RepReport> implements Serializable{
 	public void setCYValue(java.lang.String cYValue){
 		fieldValueMap.put(CYVALUE, cYValue);
 		 this.cYValue=cYValue;
+	}
+	public java.lang.String getLXValueFrom(){
+		return this.lXValueFrom;
+	}
+
+	public void setLXValueFrom(java.lang.String lXValueFrom){
+		fieldValueMap.put(LXVALUEFROM, lXValueFrom);
+		 this.lXValueFrom=lXValueFrom;
+	}
+	public java.lang.String getLXValue(){
+		return this.lXValue;
+	}
+
+	public void setLXValue(java.lang.String lXValue){
+		fieldValueMap.put(LXVALUE, lXValue);
+		 this.lXValue=lXValue;
+	}
+	public java.lang.String getLYValueFrom(){
+		return this.lYValueFrom;
+	}
+
+	public void setLYValueFrom(java.lang.String lYValueFrom){
+		fieldValueMap.put(LYVALUEFROM, lYValueFrom);
+		 this.lYValueFrom=lYValueFrom;
+	}
+	public java.lang.String getLYValue(){
+		return this.lYValue;
+	}
+
+	public void setLYValue(java.lang.String lYValue){
+		fieldValueMap.put(LYVALUE, lYValue);
+		 this.lYValue=lYValue;
+	}
+	public java.lang.String getLYTitle(){
+		return this.lYTitle;
+	}
+
+	public void setLYTitle(java.lang.String lYTitle){
+		fieldValueMap.put(LYTITLE, lYTitle);
+		 this.lYTitle=lYTitle;
+	}
+	public java.lang.String getLYUnit(){
+		return this.lYUnit;
+	}
+
+	public void setLYUnit(java.lang.String lYUnit){
+		fieldValueMap.put(LYUNIT, lYUnit);
+		 this.lYUnit=lYUnit;
 	}
 }

@@ -12,6 +12,13 @@ CREATE TABLE `rep_report` (
   `c_y_value` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图y轴值来源,与类型对应:某些列名(逗号分割)，某一列名称',
   `c_y_title` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图y轴title',
   `c_y_unit` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '柱状图y轴刻度单位，例如：米，个，元等',
+  
+  `l_x_value_from` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '曲线图x轴值来源类型：columnName 某些列名(集合) ,  columnValue 某列的值',
+  `l_x_value` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '曲线图x轴值来源,与类型对应:某些列名(逗号分割)，某一列名称',
+  `l_y_value_from` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '曲线图y轴值来源类型：columnName 某些列名(集合) ,  columnValue 某列的值',
+  `l_y_value` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '曲线图y轴值来源,与类型对应:某些列名(逗号分割)，某一列名称',
+  `l_y_title` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '曲线图y轴title',
+  `l_y_unit` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '曲线图y轴刻度单位，例如：米，个，元等',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='自定义报表头';
 

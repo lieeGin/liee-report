@@ -86,39 +86,84 @@
 			  						<tr class="column" style="display:none">  <!-- 柱状图标识 -->
 			  							<td align="right" class="tdStyle">柱状图X轴值来源：</td>
 			  							<td align="left" class="tdStyle" >
-			  								<select name ="cxvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
+			  								<select name ="cxvalueFrom" id="cxvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
 			  									<option value="columnName"> 某些列名(集合)</option>
 			  									<option value="columnValue">某列的值</option>
 			  								</select>
 			  							</td>
 			  							<td align="right" class="tdStyle">柱状图X轴对应列名：</td>
 			  							<td align="left" class="tdStyle">
-			  								<input type="text" name="cxvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  								<input type="text" name="cxvalue" id="cxvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
 			  							</td>
 			  						</tr>
 			  						<tr class="column" style="display:none">  <!-- 柱状图标识 -->
 			  								<td align="right" class="tdStyle">柱状图Y轴值来源：</td>
 											<td align="left" class="tdStyle" >
-				  								<select name ="cyvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
+				  								<select name ="cyvalueFrom" id="cyvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
 			  									<option value="columnName"> 某些列名(集合)</option>
 			  									<option value="columnValue">某列的值</option>
 			  								</select>
 				  							</td>
 			  								<td align="right" class="tdStyle">柱状图Y轴对应列名：</td>
 				  							<td align="left" class="tdStyle">
-			  									<input type="text" name="cyvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  									<input type="text" name="cyvalue" id="cyvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
 				  							</td>
 			  						</tr>
 			  						<tr class="column" style="display:none">  <!-- 柱状图标识 -->
 			  							<td align="right" class="tdStyle">柱状图Y轴Title：</td>
 			  							<td align="left" class="tdStyle" >
-			  								<input type="text" name="cytitle" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  								<input type="text" name="cytitle" id="cytitle" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
 			  							</td>
 			  							<td align="right" class="tdStyle">柱状图Y轴单位:</td>
 			  							<td align="left" class="tdStyle" >
-			  								<input type="text" name="cyunit" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  								<input type="text" name="cyunit" id="cyunit" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
 			  							</td>
 			  						</tr>
+			  						
+			  						
+			  						
+			  						<tr class="line" style="display:none">
+			  							<td align="right" class="tdStyle"></td>
+			  							<td align="left" class="tdStyle" colspan="3"><b>曲线图配置</b>:</td>
+			  						</tr>
+			  						<tr class="line" style="display:none">  <!-- 曲线图标识 -->
+			  							<td align="right" class="tdStyle">曲线图X轴值来源：</td>
+			  							<td align="left" class="tdStyle" >
+			  								<select name ="lxvalueFrom" id="lxvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
+			  									<option value="columnName"> 某些列名(集合)</option>
+			  									<option value="columnValue">某列的值</option>
+			  								</select>
+			  							</td>
+			  							<td align="right" class="tdStyle">曲线图X轴对应列名：</td>
+			  							<td align="left" class="tdStyle">
+			  								<input type="text" name="lxvalue" id="lxvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  							</td>
+			  						</tr>
+			  						<tr class="line" style="display:none">  <!-- 曲线图标识 -->
+			  								<td align="right" class="tdStyle">曲线图Y轴值来源：</td>
+											<td align="left" class="tdStyle" >
+				  								<select name ="lyvalueFrom" id="lyvalueFrom" class="easyui-combobox" style="font-size:12px;width:120px; " panelHeight="100">
+			  									<option value="columnName"> 某些列名(集合)</option>
+			  									<option value="columnValue">某列的值</option>
+			  								</select>
+				  							</td>
+			  								<td align="right" class="tdStyle">曲线图Y轴对应列名：</td>
+				  							<td align="left" class="tdStyle">
+			  									<input type="text" name="lyvalue" id="lyvalue" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+				  							</td>
+			  						</tr>
+			  						<tr class="line" style="display:none">  <!-- 曲线图标识 -->
+			  							<td align="right" class="tdStyle">曲线图Y轴Title：</td>
+			  							<td align="left" class="tdStyle" >
+			  								<input type="text" name="lytitle" id="lytitle" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  							</td>
+			  							<td align="right" class="tdStyle">曲线图Y轴单位:</td>
+			  							<td align="left" class="tdStyle" >
+			  								<input type="text" name="lyunit" id="lyunit" class="easyui-validatebox" style="font-size:12px;width:120px;"/>
+			  							</td>
+			  						</tr>
+			  						
+			  						
 			  						
 			  						<tr>
 			  							<td align="right" class="tdStyle">groovy脚本:</td>
