@@ -510,11 +510,11 @@ $(function(){
 					 columnEditRow = rowIndex;
 				} ,
 		        columns:[[
-		            {field:'id',title:'ID',width:100,align:'center'},  
-		            {field:'title',title:'字段名称',width:100,align:'center',editor:{type : 'text'}},  
-		  			{field:'field',title:'字段编码',width:100,align:'center',editor:{type : 'text'}},
-		  			{field:'sourceField',title:'对应数据源字段',width:100,align:'center',editor:{type : 'text'}},
-		  			{field:'sortable',title:'是否排序',width:100,align:'center', editor:{  
+		            {field:'id',title:'ID',width:50,align:'center'},  
+		            {field:'title',title:'字段名称',width:80,align:'center',editor:{type : 'text'}},  
+		  			{field:'field',title:'字段编码',width:80,align:'center',editor:{type : 'text'}},
+		  			{field:'sourceField',title:'对应数据源字段',width:80,align:'center',editor:{type : 'text'}},
+		  			{field:'sortable',title:'是否排序',width:50,align:'center', editor:{  
 		                type:'combobox',  
 		                options:{  
 		                    valueField:'value',  
@@ -531,8 +531,8 @@ $(function(){
 					    } 
 					    return value;
 					}},
-		  			{field:'width',title:'列宽',width:100,align:'center',editor:{type : 'numberbox'}},
-		  			{field:'align',title:'对齐方式',width:100,align:'center',editor:{  
+		  			{field:'width',title:'列宽',width:50,align:'center',editor:{type : 'numberbox'}},
+		  			{field:'align',title:'对齐方式',width:50,align:'center',editor:{  
 		                type:'combobox',  
 		                options:{  
 		                    valueField:'value',  
@@ -549,6 +549,7 @@ $(function(){
 					    } 
 					    return value;
 					}},
+					{field:'formatter',title:'显示处理(js代码)',width:150,align:'center',editor:{type:'textarea'}}
 		        ]],
 		        toolbar:[{
 	        		text:'新增',

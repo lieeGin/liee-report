@@ -56,7 +56,7 @@ public class CreateDao {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new CreateDao().createDao4jdbc("com.liee.core.dao", "sq_ranks", System.getProperty("user.dir") + "\\src\\main\\java\\com\\liee\\core\\dao");
+		new CreateDao().createDao4jdbc("com.liee.core.dao", "sys_code", System.getProperty("user.dir") + "\\src\\main\\java\\com\\liee\\core\\dao");
 		// test();
 	}
 }
