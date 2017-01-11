@@ -188,6 +188,7 @@ $(function(){
 						
 						// 选择的类型
 						columnSelect();
+						lineSelect();
 						
 						editDialog.dialog("open");
 						
