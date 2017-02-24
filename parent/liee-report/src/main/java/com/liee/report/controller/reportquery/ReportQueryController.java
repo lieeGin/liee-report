@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.liee.core.common.BasePageModel;
 import com.liee.core.common.BaseReturnModel;
 import com.liee.core.controller.BaseController;
+import com.liee.core.utils.JedisUtil;
 import com.liee.core.utils.StringUtil;
 import com.liee.report.common.ChartResult;
 import com.liee.report.common.ChartSerie;
@@ -104,12 +105,17 @@ public class ReportQueryController extends BaseController{
 		// 考虑添加到redis  TODO 
 		RepReport r = null;
 		try{
-			RepReport q = new RepReport();
-			q.where(RepReport.CODE.EQ(code));
-			List<RepReport> list = q.query();
-			if(list!=null && list.size()>0){
-				r = list.get(0);
+			r = (RepReport)JedisUtil.getObject(code);
+			if(r==null){
+				RepReport q = new RepReport();
+				q.where(RepReport.CODE.EQ(code));
+				List<RepReport> list = q.query();
+				if(list!=null && list.size()>0){
+					r = list.get(0);
+					JedisUtil.setObject(code, r);
+				}
 			}
+		
 		}catch(Exception e){
 			logger.error("查询报表配置错误", e);
 		}

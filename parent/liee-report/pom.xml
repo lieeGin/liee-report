@@ -12,7 +12,7 @@
 	<packaging>war</packaging>
 	<name>liee-report Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	 
+
 	<dependencies>
 		<dependency>
 			<groupId>com</groupId>
@@ -20,39 +20,47 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
-		
-	 	<dependency>
+
+		<dependency>
 			<groupId>com</groupId>
 			<artifactId>liee-web</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
-		 
-		<!-- <dependency>
-			<groupId>com</groupId>
-			<artifactId>liee-web</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>warpath</type>
-		</dependency> -->
-		
-		<dependency>  
-		      <groupId>org.codehaus.groovy</groupId>
-		      <artifactId>groovy-all</artifactId>
-		      <version>2.4.7</version>
+
+		<!-- <dependency> <groupId>com</groupId> <artifactId>liee-web</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> <type>warpath</type> </dependency> -->
+
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.4.7</version>
 		</dependency>
-		
-		<dependency>  
-		  	 <groupId>org.codehaus.groovy</groupId>  
-		  	 <artifactId>groovy</artifactId>  
-		 	 <version>2.1.6</version>  
-		</dependency>  
-		<dependency>  
-		 	 <groupId>org.codehaus.groovy</groupId>  
-		 	 <artifactId>groovy-jsr223</artifactId>  
-		 	 <version>2.1.6</version>  
-		</dependency>  
+
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>2.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-jsr223</artifactId>
+			<version>2.1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-eclipse-compiler</artifactId>
+			<version>2.9.2-01</version>
+			<type>maven-plugin</type>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-eclipse-batch</artifactId>
+			<version>2.4.3-01</version>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>liee-report</finalName>
 		<plugins>
@@ -66,9 +74,9 @@
 						<overlay>
 							<groupId>com</groupId>
 							<artifactId>liee-web</artifactId>
-							 <excludes> <!-- 那些文件可以忽略不,整合的时候不会将SettleAccountsModel文件整合进war中 -->  
-                                <exclude>**/webapp/</exclude>  
-                            </excludes>  
+							<excludes> <!-- 那些文件可以忽略不,整合的时候不会将SettleAccountsModel文件整合进war中 -->
+								<exclude>**/webapp/</exclude>
+							</excludes>
 						</overlay>
 					</overlays>
 				</configuration>
