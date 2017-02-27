@@ -1,5 +1,6 @@
 package com.liee.core.utils;
 
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.liee.core.dao.SysMenu;
 import com.liee.core.log.Logger;
 
@@ -71,16 +73,19 @@ public class JedisUtil {
 
 		Jedis r = jedisPool.getResource();
 
-		/*SysMenu m = new SysMenu();
+		SysMenu m = new SysMenu();
 		m.setMenuName("测试");
-		m.setUrl("qweqweqe/qweqweqe");*/
-		Test t = new Test();
+		m.setUrl("qweqweqe/qweqweqe");
+		/*Test t = new Test();
 		t.setName("11111");
-		t.setPhone("2222");
-		JedisUtil.setJson("jsonObj", t);
+		t.setPhone("2222");*/
+		JedisUtil.setJson("jsonm", m);
 		
-		Map mm = (Map)JedisUtil.getJson("jsonObj");
-		System.out.println("result:"+mm.get("name")+":"+ mm.get("phone"));
+		/*Map mm = (Map)JedisUtil.getJson("jsonObj");
+		System.out.println("result:"+mm.get("name")+":"+ mm.get("phone"));*/
+		
+		Map mm = (Map)JedisUtil.getJson("jsonm");
+		System.out.println("result:"+mm.get("menuName")+":"+ mm.get("url"));
 	}
 
 	/**
@@ -152,7 +157,8 @@ public class JedisUtil {
 	 */
 	public static String setJson(String key, Object object) {
 		Jedis jedis = getJedis();
-		Gson gson = new Gson();
+		String[] excludeFields = new String[]{"fieldValueMap","whereMap","sortStr","clazz","fields","havingMap","groupStr","isloggerOn","isCache"};
+		Gson gson = new GsonBuilder().setExclusionStrategies(new GsonKit(excludeFields)).create(); 
 		String res = gson.toJson(object);
 		return jedis.set(key, res);
 	}
